@@ -4,10 +4,10 @@ import datetime
 
 
 def home(request):
-    return redirect('/all/all')
+    return redirect('/skill/all')
 
 def all(request):
-    return redirect('/all/all')
+    return redirect('/skill/all')
 
 def dataPrint(request, category):  
     now_date = str(datetime.datetime.now()).split(' ')[0]
