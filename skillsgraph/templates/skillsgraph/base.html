@@ -5,13 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>statsjustjoin.it</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+<style>
+    .cont {
+  justify-content: center;
+  margin: auto;
+  width: 75%;
+  padding: 10px;
+}
+</style>
 </head>
 <body>
 
-<div class="container">
+<div class="cont">
     <a href="{% url 'dataPrint' 'all' %}"><button>all</button></a>
-    <a href="{% url 'dataPrint' 'javascript' %}"><button>javacript</button></a>
+    <a href="{% url 'dataPrint' 'javascript' %}"><button>javascript</button></a>
     <a href="{% url 'dataPrint' 'html' %}"><button>html</button></a>
     <a href="{% url 'dataPrint' 'php' %}"><button>php</button></a>
     <a href="{% url 'dataPrint' 'ruby' %}"><button>ruby</button></a>
@@ -34,11 +41,10 @@
     <a href="{% url 'dataPrint' 'support' %}"><button>support</button></a>
     <a href="{% url 'dataPrint' 'other' %}"><button>other</button></a>
     <a href="{% url 'jobs' %}"><button>JOBS</button></a>
-    
+</div>
     <br><br>
-    <div class="">
+    <div class="container">
         {% block content %}{% endblock %}
     </div>
-</div>
 </body>
 </html>
