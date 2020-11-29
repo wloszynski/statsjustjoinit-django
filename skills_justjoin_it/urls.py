@@ -20,6 +20,8 @@ from skillsgraph import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('all', views.all, name='all'),
+    path('all/<str:category>', views.dataPrint, name='dataPrint')
 
 
 ]
