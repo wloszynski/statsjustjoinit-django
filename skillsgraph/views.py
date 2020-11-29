@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, redirect
 import sqlite3
 import datetime
 
@@ -9,8 +9,8 @@ def home(request):
 def all(request):
     return redirect('/skill/all')
 
-def dataPrint(request, category):  
-    now_date = str(datetime.datetime.now()).split(' ')[0]
+def dataPrint(request, category):
+    # now_date = str(datetime.datetime.now()).split(' ')[0]
     conn = sqlite3.connect('skill_counter_all.sqlite')
     cur = conn.cursor()
 
@@ -20,12 +20,12 @@ def dataPrint(request, category):
 
     cur.execute('''
         SELECT skill.name, overtime_skills.counter
-        FROM overtime_skills 
+        FROM overtime_skills
         INNER JOIN skill ON skill.id=overtime_skills.skill_id
         WHERE overtime_skills.language_id like ?
     ''', (cat_id,))
     rows = cur.fetchall()
-    
+
 
     return render(request, 'skillsgraph/dataInsert.html', {'rows':rows, 'category':category})
 
