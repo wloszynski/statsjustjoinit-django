@@ -24,12 +24,18 @@ def dataPrint(request, category):
         INNER JOIN skill ON skill.id=overtime_skills.skill_id
         WHERE overtime_skills.language_id like ?
     ''', (cat_id,))
-    rows = cur.fetchall()
+
+    rows = dict(cur.fetchall())
+    rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
     
 
     return render(request, 'skillsgraph/dataInsert.html', {'rows':rows, 'category':category})
 
 def jobs(request):
+    def convert(tup, di): 
+        for a, b in tup: 
+            di.setdefault(a, []).append(b) 
+        return di 
 
     now_date = str(datetime.datetime.now()).split(' ')[0]
     conn = sqlite3.connect('skill_counter_all.sqlite')
@@ -40,6 +46,9 @@ def jobs(request):
         FROM overtime_jobs 
         INNER JOIN language ON language.id=overtime_jobs.language_id
     ''')
-    rows = cur.fetchall()
+    
+    rows = dict(cur.fetchall()[1:])
+    rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
+    
     
     return render(request, 'skillsgraph/jobs.html', {'rows':rows})
