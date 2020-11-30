@@ -28,6 +28,13 @@ def dataPrint(request, category):
     rows = dict(cur.fetchall())
     rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
     
+    if len(rows) > 35:
+        rest_rows = rows[36:]
+        rows = rows[:36]
+        sum_rest_rows = 0
+        for row in rest_rows:
+            sum_rest_rows += row[1]
+        rows.append(('rest', sum_rest_rows))
 
     return render(request, 'skillsgraph/dataInsert.html', {'rows':rows, 'category':category})
 
@@ -50,5 +57,11 @@ def jobs(request):
     rows = dict(cur.fetchall()[1:])
     rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
     
-    
+    if len(rows) > 35:
+        rest_rows = rows[36:]
+        rows = rows[:36]
+        sum_rest_rows = 0
+        for row in rest_rows:
+            sum_rest_rows += row[1]
+        rows.append(('rest', sum_rest_rows))
     return render(request, 'skillsgraph/jobs.html', {'rows':rows})
