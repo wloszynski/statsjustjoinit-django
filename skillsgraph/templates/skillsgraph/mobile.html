@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+        integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
 
     <style>
         body,
@@ -41,13 +43,18 @@
             justify-content: space-between;
             height: 8vh;
             line-height: 8vh;
+            border-bottom: 0.1px solid grey;
+        }
+
+        div.options {
+            line-height: 8vh;
+            height: 8vh;
         }
 
         div.num-app {
             background-color: #FFFFFF;
             display: flex;
             justify-content: space-between;
-
         }
 
         div.content {
@@ -67,78 +74,59 @@
             margin-top: 1vh;
             background-color: #FFFFFF;
         }
+
+        a.num-app-link {
+            background-color: #f2f5f7;
+            padding: 5px;
+            margin-left: 10px;
+            border-radius: 10px
+        }
+
+        button.button-circle {
+            border-radius: 100px;
+            padding: 7px;
+        }
     </style>
 </head>
 
 <body>
     <div id="root" class="flex-container">
         <div class="top flex-item">
-            <span>statsjustjoin.it</span>
+            <div>
+                <span>statsjustjoin.it</span>
+            </div>
             <div>
                 <button id="menu">|||</button>
             </div>
         </div>
         <div class="options flex-item">
             <div>
-                <button><span>O</span></button>
-                <button>Technology</button>
-                <button>More filters</button>
+                <button class="button-circle"><i class="fas fa-search"></i></button>
+                <button class="button-circle">Technology</button>
+                <button class="button-circle">More filters</button>
             </div>
         </div>
         <div class="content flex-item items-container">
             <div class="num-app">
-                <button><span>Num of appearances</span></button>
+                <a class="num-app-link">
+                    <div>num of appearances</div>
+                </a>
                 <button id="chart-btn"><span>chart</span></button>
             </div>
             <div class="flex-container ">
                 <div class="top flex-item item">
                     <span>Python</span>
-                    <span>22</span>
+                    <span>122</span>
                 </div>
                 <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
+                    <span>Django</span>
+                    <span>70</span>
                 </div>
                 <div class="top flex-item item">
-                    <span>Python</span>
+                    <span>PostgreSQL</span>
                     <span>22</span>
                 </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>22</span>
-                </div>
+
             </div>
         </div>
         <div class="content flex-item items-container chart-div" style="display:none">
@@ -151,87 +139,86 @@
         </div>
     </div>
     <script>
-        var char_button = document.querySelector("#chart-btn");
-        char_button.addEventListener("click", function(){
-            var content_div = document.querySelector(".content");
-            var chart_div = document.querySelector(".chart-div");
+        var chart_button = document.querySelector("#chart-btn");
+        var content_div = document.querySelector(".content");
+        var chart_div = document.querySelector(".chart-div");
+        var back_chart_button = document.querySelector("#back-chart-btn");
+
+
+        chart_button.addEventListener("click", function () {
             content_div.style.display = "none";
             chart_div.style.display = "block";
         })
-        var char_button = document.querySelector("#back-chart-btn");
-        char_button.addEventListener("click", function(){
-            var content_div = document.querySelector(".content");
+        back_chart_button.addEventListener("click", function () {
             content_div.style.display = "block";
+            chart_div.style.display = "none";
         })
+
 
         let myChart = document.getElementById('myChart').getContext('2d');
 
-    // Global Options
-    Chart.defaults.global.defaultFontFamily = 'Lato';
-    Chart.defaults.global.defaultFontSize = 18;
-    Chart.defaults.global.defaultFontColor = '#777';
+        let massPopChart = new Chart(myChart, {
+            type: 'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+            data: {
+                labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
+                datasets: [{
+                    label: 'Population',
+                    data: [
+                        617594,
+                        181045,
+                        153060,
+                        106519,
+                        105162,
+                        95072
+                    ],
+                    //backgroundColor:'green',
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.6)',
+                        'rgba(54, 162, 235, 0.6)',
+                        'rgba(255, 206, 86, 0.6)',
+                        'rgba(75, 192, 192, 0.6)',
+                        'rgba(153, 102, 255, 0.6)',
+                        'rgba(255, 159, 64, 0.6)',
+                        'rgba(255, 99, 132, 0.6)'
+                    ],
+                    borderWidth: 1,
+                    borderColor: '#777',
+                    hoverBorderWidth: 3,
+                    hoverBorderColor: '#000'
+                }]
+            },
+            options: {
+                title: {
+                    display: false,
+                    text: 'Fajne rzeczy',
+                    fontSize: 25
+                },
+                legend: {
+                    display: false,
+                    position: 'right',
+                    labels: {
+                        fontColor: '#000'
+                    }
+                },
+                layout: {
+                    padding: {
+                        left: 50,
+                        right: 0,
+                        bottom: 0,
+                        top: 0
+                    }
+                },
+                tooltips: {
+                    enabled: true
+                }
+            }
+        });
 
-    let massPopChart = new Chart(myChart, {
-      type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-      data:{
-        labels:['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-        datasets:[{
-          label:'Population',
-          data:[
-            617594,
-            181045,
-            153060,
-            106519,
-            105162,
-            95072
-          ],
-          //backgroundColor:'green',
-          backgroundColor:[
-            'rgba(255, 99, 132, 0.6)',
-            'rgba(54, 162, 235, 0.6)',
-            'rgba(255, 206, 86, 0.6)',
-            'rgba(75, 192, 192, 0.6)',
-            'rgba(153, 102, 255, 0.6)',
-            'rgba(255, 159, 64, 0.6)',
-            'rgba(255, 99, 132, 0.6)'
-          ],
-          borderWidth:1,
-          borderColor:'#777',
-          hoverBorderWidth:3,
-          hoverBorderColor:'#000'
-        }]
-      },
-      options:{
-        title:{
-          display:true,
-          text:'Fajne rzeczy',
-          fontSize:25
-        },
-        legend:{
-          display:false,
-          position:'right',
-          labels:{
-            fontColor:'#000'
-          }
-        },
-        layout:{
-          padding:{
-            left:50,
-            right:0,
-            bottom:0,
-            top:0
-          }
-        },
-        tooltips:{
-          enabled:true
-        }
-      }
-    });
 
-		
 
-		
-	
+
+
     </script>
 </body>
+
 </html>
