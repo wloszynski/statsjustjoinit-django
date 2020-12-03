@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body,
+        html {
+            padding: 0;
+            margin: 0;
+        }
+
+        #root {
+            height: 100vh;
+        }
+
+        .flex-container {
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            align-items: stretch;
+            align-content: stretch;
+        }
+
+        .flex-item {
+            display: block;
+            flex-grow: 0;
+            flex-shrink: 1;
+            flex-basis: auto;
+            align-self: auto;
+            order: 0;
+        }
+
+        div.top {
+            display: flex;
+            justify-content: space-between;
+            height: 8vh;
+            line-height: 8vh;
+        }
+
+        div.num-app {
+            background-color: #FFFFFF;
+            display: flex;
+            justify-content: space-between;
+
+        }
+
+        div.content {
+            flex-grow: 1;
+        }
+
+        div.items-container {
+            background-color: #f2f5f7;
+        }
+
+        div.item {
+            height: 6vh;
+            padding: 5px;
+            text-align: center;
+            line-height: 6vh;
+            margin-bottom: 0.5vh;
+            margin-top: 1vh;
+            background-color: #FFFFFF;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="root" class="flex-container">
+        <div class="top flex-item">
+            <span>statsjustjoin.it</span>
+            <div>
+                <button id="menu">|||</button>
+            </div>
+        </div>
+        <div class="options flex-item">
+            <div>
+                <button><span>O</span></button>
+                <button>Technology</button>
+                <button>More filters</button>
+            </div>
+        </div>
+        <div class="content flex-item items-container">
+            <div class="num-app">
+                <button><span>Num of appearances</span></button>
+                <button><span>chart</span></button>
+            </div>
+            <div class="flex-container ">
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+                <div class="top flex-item item">
+                    <span>Python</span>
+                    <span>22</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
