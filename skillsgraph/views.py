@@ -4,13 +4,15 @@ import datetime
 
 
 def home(request):
-    return render(request, 'skillsgraph/mobile.html')
+    return redirect('/skills/all')
 
 
 def all(request):
     return redirect('/skills/all')
 
 def dataPrint(request, category):
+    categories = ['all', 'javascript', 'html', 'php', 'ruby', 'python', 'java', 'net', 'scala', 'c', 'mobile', 'testing', 'devops', 'ux', 'pm', 'game', 'analytics', 'security', 'data', 'go', 'sap', 'support', 'other']
+
     # now_date = str(datetime.datetime.now()).split(' ')[0]
     conn = sqlite3.connect('skill_counter_all.sqlite')
     cur = conn.cursor()
@@ -28,6 +30,7 @@ def dataPrint(request, category):
 
     rows = dict(cur.fetchall())
     rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
+    all_rows = rows.copy()
     
     if len(rows) > 35:
         rest_rows = rows[36:]
@@ -37,7 +40,8 @@ def dataPrint(request, category):
             sum_rest_rows += row[1]
         rows.append(('rest', sum_rest_rows))
 
-    return render(request, 'skillsgraph/dataInsert.html', {'rows':rows, 'category':category})
+    return render(request, 'skillsgraph/mobile.html', {'categories':categories,'rows':rows, 'category_selected':category, 'all_rows':all_rows})
+
 
 def jobs(request):
     def convert(tup, di): 

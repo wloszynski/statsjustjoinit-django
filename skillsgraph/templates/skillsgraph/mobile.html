@@ -1,230 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
-{% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-        integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw=" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
+      integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
+      crossorigin="anonymous"
+    ></script>
 
     <style>
-        body,
-        html {
-            padding: 0;
-            margin: 0;
-        }
+      body,
+      html {
+        padding: 0;
+        margin: 0;
+      }
 
-        #root {
-            height: 100vh;
-        }
+      #root {
+        height: 100vh;
+      }
 
-        .flex-container {
-            display: flex;
-            flex-direction: column;
-            flex-wrap: nowrap;
-            justify-content: flex-start;
-            align-items: stretch;
-            align-content: stretch;
-        }
+      .flex-container {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-items: stretch;
+        align-content: stretch;
+      }
 
-        .flex-item {
-            display: block;
-            flex-grow: 0;
-            flex-shrink: 1;
-            flex-basis: auto;
-            align-self: auto;
-            order: 0;
-        }
+      .flex-item {
+        display: block;
+        flex-grow: 0;
+        flex-shrink: 1;
+        flex-basis: auto;
+        align-self: auto;
+        order: 0;
+      }
 
-        div.top {
-            display: flex;
-            justify-content: space-between;
-            height: 8vh;
-            line-height: 8vh;
-            border-bottom: 0.1px solid grey;
-        }
+      div.top {
+        display: flex;
+        justify-content: space-between;
+        height: 8vh;
+        line-height: 8vh;
+        border-bottom: 0.1px solid grey;
+      }
 
-        div.options {
-            line-height: 8vh;
-            height: 8vh;
-        }
+      div.options {
+        line-height: 8vh;
+        height: 8vh;
+      }
 
-        div.num-app {
-            background-color: #FFFFFF;
-            display: flex;
-            justify-content: space-between;
-        }
+      div.num-app {
+        background-color: #ffffff;
+        display: flex;
+        justify-content: space-between;
+      }
 
-        div.content {
-            flex-grow: 1;
-        }
+      div.content {
+        flex-grow: 1;
+      }
 
-        div.items-container {
-            background-color: #f2f5f7;
-        }
+      div.items-container {
+        background-color: #f2f5f7;
+      }
 
-        div.item {
-            height: 6vh;
-            padding: 5px;
-            text-align: center;
-            line-height: 6vh;
-            margin-bottom: 0.5vh;
-            margin-top: 1vh;
-            background-color: #FFFFFF;
-        }
+      div.item {
+        height: 6vh;
+        padding: 5px;
+        text-align: center;
+        line-height: 6vh;
+        margin-bottom: 0.5vh;
+        margin-top: 1vh;
+        background-color: #ffffff;
+      }
 
-        a.num-app-link {
-            background-color: #f2f5f7;
-            padding: 5px;
-            margin-left: 10px;
-            border-radius: 10px
-        }  
+      a.num-app-link {
+        background-color: #f2f5f7;
+        padding: 5px;
+        margin-left: 10px;
+        border-radius: 10px;
+      }
 
-        button.button-circle {
-            border-radius: 100px;
-            padding: 7px;
+      button.button-circle {
+        border-radius: 100px;
+        padding: 7px;
+      }
+      img.chart-icon {
+        height: 4vh;
+        width: 4vh;
+        padding-right: 10px;
+      }
+      img.small-icon {
+        height: 4vh;
+        width: 4vh;
+        padding-right: 10px;
+      }
+  
+      @media only screen and (max-width: 600px) {
+        .link-icon {
+          display: none;
         }
-        img.chart-icon{
-            height: 4vh;
-            width: 4vh;
-            padding-right: 10px;
-        }
+       
+      }
+  
     </style>
-</head>
+  </head>
 
-<body>
+  <body>
     <div id="root" class="flex-container">
-        <div class="top flex-item">
-            <div>
-                <span>statsjustjoin.it</span>
-            </div>
-            <div>
-                <button id="menu">|||</button>
-            </div>
+      <div class="top flex-item">
+        <div>
+          <span>statsjustjoin.it</span>
         </div>
-        <div class="options flex-item">
-            <div>
-                <!-- <button class="button-circle"><i class="fas fa-search"></i></button> -->
-                <button class="button-circle">Technology</button>
-                <button class="button-circle">More filters</button>
-            </div>
+        <div>
+          <button id="menu">|||</button>
         </div>
-        <div class="content flex-item items-container">
-            <div class="num-app">
-                <a class="num-app-link">
-                    <div>num of appearances</div>
-                </a>
-                <img class="chart-icon" src="{% static 'skillsgraph/pie-chart.svg' %}" alt="chart">
+      </div>
+      <div class="options flex-item">
+        <div>
 
-            </div>
-            <div class="flex-container ">
-                <div class="top flex-item item">
-                    <span>Python</span>
-                    <span>122</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>Django</span>
-                    <span>70</span>
-                </div>
-                <div class="top flex-item item">
-                    <span>PostgreSQL</span>
-                    <span>22</span>
-                </div>
-
-            </div>
+          <!-- <button class="button-circle"><i class="fas fa-search"></i></button> -->
+          <button class="button-circle">Technology</button>
+          {% for category in categories %}
+          <a class="link-icon" href="/skills/{{category}}">
+            <img
+              class="small-icon"
+              src="{% static '/skillsgraph/' %}{{category}}.svg"
+              alt="{{category}}'.svg'"
+            />
+          </a>
+          {% endfor %}
+          <select name="category" class="link-list" onchange="goToCategory()">
+            {% for category in categories %}
+            {% if category_selected == category %}
+            <option value="{{ category }}" selected>{{ category }}</option>
+            {% else %}
+            <option value="{{ category }}">{{ category }}</option>
+            {% endif %}
+            {% endfor %}
+          </select>
+          <button class="button-circle">More filters</button>
         </div>
-        <div class="content flex-item items-container chart-div" style="display:none">
-            <div class="num-app">
-                <button id="back-chart-btn"><span>back</span></button>
-            </div>
-            <div class="flex-container">
-                <canvas id="myChart"></canvas>
-            </div>
+      </div>
+      <div class="content flex-item items-container">
+        <div class="num-app">
+          <a class="num-app-link">
+            <div>num of appearances</div>
+          </a>
+          <img
+            class="chart-icon"
+            src="{% static 'skillsgraph/pie-chart.svg' %}"
+            alt="chart"
+          />
         </div>
+        <div class="flex-container">
+          {% for row in all_rows %}
+          <div class="top flex-item item">
+            <span> {{ row.0 }}</span>
+            <span> {{ row.1 }}</span>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div
+        class="content flex-item items-container chart-div"
+        style="display: none"
+      >
+        <div class="num-app">
+          <button id="back-chart-btn"><span>back</span></button>
+        </div>
+        <div class="flex-container">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
     </div>
     <script>
-        let chart_button = document.querySelector(".chart-icon");
-        let content_div = document.querySelector(".content");
-        let chart_div = document.querySelector(".chart-div");
-        let back_chart_button = document.querySelector("#back-chart-btn");
+          let chart_button = document.querySelector(".chart-icon");
+          let content_div = document.querySelector(".content");
+          let chart_div = document.querySelector(".chart-div");
+          let back_chart_button = document.querySelector("#back-chart-btn");
+          let category_select = document.querySelector('.link-list');
 
-
-        chart_button.addEventListener("click", function () {
+          chart_button.addEventListener("click", function () {
             content_div.style.display = "none";
             chart_div.style.display = "block";
-        })
-        back_chart_button.addEventListener("click", function () {
+          });
+          back_chart_button.addEventListener("click", function () {
             content_div.style.display = "block";
             chart_div.style.display = "none";
-        })
+          });
 
+          category_select.addEventListener("change", function () {
+            let cat_selected = category_select.value;
+            let url = "/skills/" + cat_selected;
+            window.location.href = url;
 
-        let myChart = document.getElementById('myChart').getContext('2d');
+          });
 
-        let massPopChart = new Chart(myChart, {
-            type: 'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-            data: {
-                labels: ['Boston', 'Worcester', 'Springfield', 'Lowell', 'Cambridge', 'New Bedford'],
-                datasets: [{
-                    label: 'Population',
-                    data: [
-                        617594,
-                        181045,
-                        153060,
-                        106519,
-                        105162,
-                        95072
-                    ],
-                    //backgroundColor:'green',
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.6)',
-                        'rgba(54, 162, 235, 0.6)',
-                        'rgba(255, 206, 86, 0.6)',
-                        'rgba(75, 192, 192, 0.6)',
-                        'rgba(153, 102, 255, 0.6)',
-                        'rgba(255, 159, 64, 0.6)',
-                        'rgba(255, 99, 132, 0.6)'
-                    ],
-                    borderWidth: 1,
-                    borderColor: '#777',
-                    hoverBorderWidth: 3,
-                    hoverBorderColor: '#000'
-                }]
-            },
-            options: {
-                title: {
-                    display: false,
-                    text: 'Fajne rzeczy',
-                    fontSize: 25
-                },
-                legend: {
-                    display: false,
-                    position: 'right',
-                    labels: {
-                        fontColor: '#000'
-                    }
-                },
-                layout: {
-                    padding: {
-                        left: 50,
-                        right: 0,
-                        bottom: 0,
-                        top: 0
-                    }
-                },
-                tooltips: {
-                    enabled: true
-                }
+          let myChart = document.getElementById('myChart').getContext('2d');
+
+      // Global Options
+      Chart.defaults.global.defaultFontFamily = 'Lato';
+      Chart.defaults.global.defaultFontSize = 18;
+      Chart.defaults.global.defaultFontColor = '#777';
+
+      let massPopChart = new Chart(myChart, {
+        type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data:{
+          labels:[{% for row in rows %}
+          "{{ row.0 }}",
+          {% endfor %}
+
+        ],
+          datasets:[{
+            label:'{{ category }}',
+            data:[
+            {% for row in rows %}
+              {{ row.1 }},
+            {% endfor %}
+            ],
+            //backgroundColor:'green',
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 0, 0, .6)',
+
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+          }]
+        },
+        options:{
+          title:{
+            display:true,
+            text:'Most wanted skills in {{ category }}',
+            fontSize:25
+          },
+          legend:{
+            display:false,
+            position:'right',
+            labels:{
+              fontColor:'#000'
             }
-        });
-
-
-
-
-
+          },
+          layout:{
+            padding:{
+              left:0,
+              right:0,
+              bottom:0,
+              top:0
+            }
+          },
+          tooltips:{
+            enabled:true
+          }
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>
