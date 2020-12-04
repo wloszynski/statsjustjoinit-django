@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+{% load static %}
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -80,11 +80,16 @@
             padding: 5px;
             margin-left: 10px;
             border-radius: 10px
-        }
+        }  
 
         button.button-circle {
             border-radius: 100px;
             padding: 7px;
+        }
+        img.chart-icon{
+            height: 4vh;
+            width: 4vh;
+            padding-right: 10px;
         }
     </style>
 </head>
@@ -111,7 +116,8 @@
                 <a class="num-app-link">
                     <div>num of appearances</div>
                 </a>
-                <button id="chart-btn"><span>chart</span></button>
+                <img class="chart-icon" src="{% static 'skillsgraph/pie-chart.svg' %}" alt="chart">
+
             </div>
             <div class="flex-container ">
                 <div class="top flex-item item">
@@ -139,10 +145,10 @@
         </div>
     </div>
     <script>
-        var chart_button = document.querySelector("#chart-btn");
-        var content_div = document.querySelector(".content");
-        var chart_div = document.querySelector(".chart-div");
-        var back_chart_button = document.querySelector("#back-chart-btn");
+        let chart_button = document.querySelector(".chart-icon");
+        let content_div = document.querySelector(".content");
+        let chart_div = document.querySelector(".chart-div");
+        let back_chart_button = document.querySelector("#back-chart-btn");
 
 
         chart_button.addEventListener("click", function () {
