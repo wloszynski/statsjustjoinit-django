@@ -4,7 +4,8 @@ import datetime
 
 
 def home(request):
-    return redirect('/skills/all')
+    return render(request, 'skillsgraph/mobile.html')
+
 
 def all(request):
     return redirect('/skills/all')
