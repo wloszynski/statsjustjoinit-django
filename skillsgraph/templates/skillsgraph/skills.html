@@ -1,31 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
-  {% load static %}
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
-      integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"
-      integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
-      crossorigin="anonymous"
-    ></script>
-    <link rel="stylesheet" href="{% static '/skillsgraph/css/style.css' %}">
-
-    
-  </head>
-
+{% extends 'skillsgraph/head.html' %}
+{% load static %}
+{% block content %}
   <body>
     <div id="root" class="flex-container">
       <div class="top flex-item">
         <div>
-          <span>statsjustjoin.it</span>
+          <span class="logo">statsjustjoin.it</span>
+          <span class="subtext">#1 Stats Job Board for IT industry</span>
         </div>
         <div>
           <button id="menu">
@@ -73,7 +54,7 @@
         <div class="flex-container">
           {% for row in all_rows %}
           <div class="top flex-item item">
-            <span> {{ row.0 }}</span>
+            <span> {{ row.0|upper }}</span>
             <span> {{ row.1 }}</span>
           </div>
           {% endfor %}
@@ -92,11 +73,11 @@
       </div>
     </div>
     <script>
-          let chart_button = document.querySelector(".chart-icon");
-          let content_div = document.querySelector(".content");
-          let chart_div = document.querySelector(".chart-div");
-          let back_chart_button = document.querySelector("#back-chart-btn");
-          let category_select = document.querySelector('.link-list');
+          const chart_button = document.querySelector(".chart-icon");
+          const content_div = document.querySelector(".content");
+          const chart_div = document.querySelector(".chart-div");
+          const back_chart_button = document.querySelector("#back-chart-btn");
+          const category_select = document.querySelector('.link-list');
 
           chart_button.addEventListener("click", function () {
             content_div.style.display = "none";
@@ -211,4 +192,5 @@
       });
     </script>
   </body>
+  {% endblock %}
 </html>
