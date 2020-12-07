@@ -104,6 +104,7 @@
           const b_btn_bg = document.querySelector('#back-btn-background');
           const menu_btn = document.querySelector('#menu');
 
+          const jokes_list = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
 
           chart_button.addEventListener("click", function () {
             content_div.style.display = "none";
@@ -124,8 +125,7 @@
 
           });
           menu_btn.addEventListener("click", function () {
-            alert("Kiedys tutaj będzie menu")
-
+            alert(jokes_list[Math.floor(Math.random() * jokes_list.length)]+"\n\nTam kiedyś będzie menu");
           });
 
           let myChart = document.getElementById('myChart').getContext('2d');
