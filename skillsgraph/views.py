@@ -12,6 +12,7 @@ def all(request):
 
 def dataPrint(request, category):
     categories = ['all', 'javascript', 'html', 'php', 'ruby', 'python', 'java', 'net', 'scala', 'c', 'mobile', 'testing', 'devops', 'ux', 'pm', 'game', 'analytics', 'security', 'data', 'go', 'sap', 'support', 'other']
+    categories_menu = ['All', 'JS', 'HTML', 'PHP', 'Ruby', 'Python', 'Java', '.Net', 'Scala', 'C', 'Mobile', 'Testing', 'DevOps', 'UX/UI', 'PM', 'Game', 'Analytics', 'Security', 'Data', 'Go', 'SAP', 'Support', 'Other']
 
     # now_date = str(datetime.datetime.now()).split(' ')[0]
     conn = sqlite3.connect('skill_counter_all.sqlite')
@@ -40,15 +41,13 @@ def dataPrint(request, category):
             sum_rest_rows += row[1]
         rows.append(('rest', sum_rest_rows))
 
-    return render(request, 'skillsgraph/skills.html', {'categories':categories,'rows':rows, 'category_selected':category, 'all_rows':all_rows})
+    categories_zipped = zip(categories, categories_menu)
 
+    return render(request, 'skillsgraph/skills.html', {'categories':categories,'rows':rows,
+ 'category_selected':category, 'all_rows':all_rows, 'categories_zipped':categories_zipped})
 
 def jobs(request):
-    def convert(tup, di): 
-        for a, b in tup: 
-            di.setdefault(a, []).append(b) 
-        return di 
-
+    
     now_date = str(datetime.datetime.now()).split(' ')[0]
     conn = sqlite3.connect('skill_counter_all.sqlite')
     cur = conn.cursor()
