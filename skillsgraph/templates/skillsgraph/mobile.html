@@ -16,6 +16,7 @@
       integrity="sha256-Uv9BNBucvCPipKQ2NS9wYpJmi8DTOEfTA/nH2aoJALw="
       crossorigin="anonymous"
     ></script>
+    <link rel="stylesheet" href="{% static '/skillsgraph/css/style.css' %}">
 
     
   </head>
@@ -27,19 +28,21 @@
           <span>statsjustjoin.it</span>
         </div>
         <div>
-          <button id="menu">|||</button>
+          <button id="menu">
+            <span aria-hidden="true">☰</span>
+          </button>
         </div>
       </div>
       <div class="options flex-item">
         <div>
 
           <!-- <button class="button-circle"><i class="fas fa-search"></i></button> -->
-          <button class="button-circle">Technology</button>
+          <!-- <button class="button-circle">Technology</button> -->
           {% for category in categories %}
           <a class="link-icon" href="/skills/{{category}}">
             <img
               class="small-icon"
-              src="{% static '/skillsgraph/' %}{{category}}.svg"
+              src="{% static '/skillsgraph/img/' %}{{category}}.svg"
               alt="{{category}}'.svg'"
             />
           </a>
@@ -63,7 +66,7 @@
           </a>
           <img
             class="chart-icon"
-            src="{% static 'skillsgraph/pie-chart.svg' %}"
+            src="{% static 'skillsgraph/img/pie-chart.svg' %}"
             alt="chart"
           />
         </div>
