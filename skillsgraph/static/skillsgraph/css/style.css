@@ -17,6 +17,15 @@ html {
   align-content: stretch;
 }
 
+.flex-container-content{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: normal;
+    align-items: normal;
+    align-content: normal;
+}
+
 .flex-item {
   display: block;
   flex-grow: 0;
@@ -25,6 +34,7 @@ html {
   align-self: auto;
   order: 0;
 }
+
 
 div.top {
   display: flex;
@@ -61,6 +71,11 @@ div.item {
   margin-bottom: 0.5vh;
   margin-top: 1vh;
   background-color: #ffffff;
+}
+
+div.item:hover{
+    background-color: #ece5e5;
+
 }
 
 a.num-app-link {
