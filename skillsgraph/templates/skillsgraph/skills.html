@@ -15,30 +15,27 @@
         </div>
       </div>
       <div class="options flex-item">
-        <div>
 
-          <!-- <button class="button-circle"><i class="fas fa-search"></i></button> -->
-          <!-- <button class="button-circle">Technology</button> -->
-          {% for category in categories %}
-          <a class="link-icon" href="/skills/{{category}}">
+          {% for category in categories_zipped %}
+          <a class="link-icon" href="/skills/{{category.0}}">
             <img
               class="small-icon"
-              src="{% static '/skillsgraph/img/' %}{{category}}.svg"
-              alt="{{category}}'.svg'"
+              src="{% static '/skillsgraph/img/' %}{{category.0}}.svg"
+              alt="{{category.0}}'.svg'"
             />
+            <span class="icon-title">{{category.1}}</span> 
+
           </a>
           {% endfor %}
           <select name="category" class="link-list" onchange="goToCategory()">
             {% for category in categories %}
             {% if category_selected == category %}
-            <option value="{{ category }}" selected>{{ category }}</option>
+            <option value="{{ category }}" selected>{{ category|title }}</option>
             {% else %}
-            <option value="{{ category }}">{{ category }}</option>
+            <option value="{{ category }}">{{ category|title }}</option>
             {% endif %}
             {% endfor %}
           </select>
-          <button class="button-circle">More filters</button>
-        </div>
       </div>
       <div class="content flex-item items-container">
         <div class="num-app">
