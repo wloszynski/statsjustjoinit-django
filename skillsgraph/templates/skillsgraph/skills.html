@@ -76,13 +76,19 @@
             alt="chart"
           />
         </div>
-        <div class="flex-container skill-items ">
+        <div class="flex-container-content skill-items">
+          <div class="flex-item-content-count scroll">
           {% for row in all_rows %}
           <div class="top flex-item item">
             <span class="item-title"> {{ row.0|upper }}</span>
             <span class="item-count"> {{ row.1 }}</span>
           </div>
           {% endfor %}
+          </div>
+          <div class="flex-item-content-chart">
+            <canvas id="myChart"></canvas>
+  
+            </div>
         </div>
      
       </div>
@@ -94,7 +100,7 @@
           <button id="back-chart-btn"><span><img src="{% static 'skillsgraph/img/left-arrow.svg' %}" alt="back-arrow" class="chart-icon"></span></button>
         </div>
         <div class="flex-container">
-          <canvas id="myChart"></canvas>
+          <canvas id="myChart_2"></canvas>
         </div>
       </div>
     </div>
@@ -141,9 +147,9 @@
           let myChart = document.getElementById('myChart').getContext('2d');
 
       // Global Options
-      Chart.defaults.global.defaultFontFamily = 'Lato';
+      Chart.defaults.global.defaultFontFamily = 'Roboto';
       Chart.defaults.global.defaultFontSize = 18;
-      Chart.defaults.global.defaultFontColor = '#777';
+      Chart.defaults.global.defaultFontColor = 'black';
 
       let massPopChart = new Chart(myChart, {
         type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
@@ -210,7 +216,7 @@
         options:{
           title:{
             display:true,
-            text:'Most wanted skills in {{ category }}',
+            text:'MOST WANTED SKILLS IN {{ category_selected|upper }}',
             fontSize:25
           },
           legend:{
@@ -233,6 +239,98 @@
           }
         }
       });
+
+      let myChart2 = document.getElementById('myChart_2').getContext('2d');
+      let massPopChart2 = new Chart(myChart2, {
+        type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data:{
+          labels:[{% for row in rows %}
+          "{{ row.0 }}",
+          {% endfor %}
+
+        ],
+          datasets:[{
+            label:'{{ category }}',
+            data:[
+            {% for row in rows %}
+              {{ row.1 }},
+            {% endfor %}
+            ],
+            //backgroundColor:'green',
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 0, 0, .6)',
+
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+          }]
+        },
+        options:{
+          title:{
+            display:true,
+            text:'MOST WANTED SKILLS IN {{ category_selected|upper }}',
+            fontSize:25
+          },
+          legend:{
+            display:false,
+            position:'right',
+            labels:{
+              fontColor:'#000'
+            }
+          },
+          layout:{
+            padding:{
+              left:0,
+              right:0,
+              bottom:0,
+              top:0
+            }
+          },
+          tooltips:{
+            enabled:true
+          }
+        }
+      });
+
+
       console.log("Jak coś to ja was chłopaki z justjoin.it kocham, kozaki jesteście ;) i generalnie super robotę robicie <3");
       console.log("a tak to w sumie pracki szukam, jakby ktoś potrzebował pracownika, to dajcie znać adrian@wloszynski.pl")
     </script>

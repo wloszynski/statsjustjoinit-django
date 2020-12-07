@@ -39,7 +39,7 @@ def dataPrint(request, category):
         sum_rest_rows = 0
         for row in rest_rows:
             sum_rest_rows += row[1]
-        rows.append(('rest', sum_rest_rows))
+        rows.append(('other', sum_rest_rows))
 
 
     return render(request, 'skillsgraph/skills.html', {'categories':categories,'rows':rows,
@@ -70,8 +70,8 @@ def jobs(request):
         sum_rest_rows = 0
         for row in rest_rows:
             sum_rest_rows += row[1]
-        rows.append(('rest', sum_rest_rows))
+        rows.append(('other', sum_rest_rows))
 
 
     return render(request, 'skillsgraph/jobs.html', {'rows':rows, 'categories':categories, 'categories_zipped':zip(categories, categories_menu)
-, 'all_rows':all_rows})
+, 'all_rows':all_rows, 'category_selected':'all jobs'})

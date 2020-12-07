@@ -52,9 +52,9 @@ span.logo {
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: normal;
-  align-items: normal;
-  align-content: normal;
+  justify-content: space-between;
+  align-items: stretch;
+  align-content: stretch;
 }
 
 .flex-item {
@@ -65,7 +65,30 @@ span.logo {
   align-self: auto;
   order: 0;
 }
+.flex-item-content-count {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  width:40%;
+}
 
+.flex-item-content-chart {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  width: 60%;
+  margin-top:10vh;
+}
+
+.full-width{
+  width:100%;
+}
 div.top {
   display: flex;
   justify-content: space-between;
@@ -144,13 +167,12 @@ button.button-circle {
   border-radius: 100px;
   padding: 7px;
 }
-img.chart-icon {
-  height: 3.5vh;
-  width: 3.5vh;
-  padding-right: 10px;
-  padding-bottom: 8px;
-  cursor: pointer;
 
+.scroll{
+    height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    text-align: justify;
 }
 img.small-icon {
   height: 4.5vh;
@@ -158,7 +180,9 @@ img.small-icon {
   padding-right: 10px;
   padding-top: 10px;
 }
-
+.chart-icon{
+  display:none;
+}
 select {
   margin-top: 10px;
   margin-bottom: 10px;
@@ -201,9 +225,43 @@ a.link-icon {
   a.link-icon {
     display: none;
   }
+ 
 }
 
+@media only screen and (max-width: 800px) {
+  img.chart-icon {
+    display:block;
+    height: 3.5vh;
+    width: 3.5vh;
+    padding-right: 10px;
+    padding-bottom: 8px;
+    cursor: pointer;
+  }
+
+.flex-item-content-count {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  width:100%;
+}
+
+.flex-item-content-chart {
+  display: block;
+  flex-grow: 0;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-self: auto;
+  order: 0;
+  width: 0%;
+}
+}
+
+
 @media only screen and (max-width: 668px) {
+  
   #added-subtext {
     display: none;
   }
