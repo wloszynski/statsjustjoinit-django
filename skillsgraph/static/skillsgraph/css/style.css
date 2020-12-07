@@ -18,8 +18,7 @@ span.logo {
   font-size: 2rem;
   font-weight: 500;
   padding-left: 2vh;
-  font-family: 'Hind', sans-serif;
-
+  font-family: "Hind", sans-serif;
 }
 .item span {
   font-size: 1.5em;
@@ -30,12 +29,14 @@ span.logo {
   color: black;
   border: 0;
   background-color: #ffffff;
+  cursor: pointer;
 }
 
-.social-icons{
+.social-icons {
   font-size: 1.5em;
   background-color: #ffffff;
-  border:0;
+  border: 0;
+  cursor: pointer;
 }
 
 .flex-container {
@@ -91,6 +92,8 @@ div.num-app {
   margin-left: 3vh;
   border: 0;
   background-color: #f2f5f7;
+  cursor: pointer;
+
 }
 
 div.content {
@@ -122,12 +125,10 @@ div.item:hover {
 
 .item-title {
   padding-left: 2vh;
-
 }
 
 .item-count {
   padding-right: 2vh;
-
 }
 
 a.num-app-link {
@@ -148,6 +149,8 @@ img.chart-icon {
   width: 3.5vh;
   padding-right: 10px;
   padding-bottom: 8px;
+  cursor: pointer;
+
 }
 img.small-icon {
   height: 4.5vh;
@@ -188,10 +191,25 @@ a.link-icon {
   color: black;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 1424px) {
+  select {
+    display: block;
+  }
+  option {
+    display: block;
+  }
   a.link-icon {
     display: none;
   }
+}
+
+@media only screen and (max-width: 668px) {
+  #added-subtext {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 525px) {
   .item span {
     font-size: 1.1em;
   }
@@ -202,13 +220,19 @@ a.link-icon {
   span.subtext {
     font-size: 0.7rem;
   }
-  #added-subtext{
-    display:none;
+
+  .social-icons {
+    font-size: 1.2em;
+    background-color: #ffffff;
+    border: 0;
   }
-  select {
-    display: block;
+  #menu {
+    font-size: 1.2em;
   }
-  option {
-    display: block;
+}
+
+@media only screen and (max-width: 380px) {
+  #for-it {
+    display: none;
   }
 }

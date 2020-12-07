@@ -6,7 +6,7 @@
       <div class="top flex-item">
         <div>
           <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
-          <span class="subtext">#1 Stats Job Board for IT<span id="added-subtext"> Industry in Poland</span></span>
+          <span class="subtext">#1 Stats Job Board <span id="for-it">for IT</span><span id="added-subtext"> Industry in Poland</span></span>
         </div>
         <div>
           <a href="https://github.com/wloszynski" target="_blank">
@@ -22,7 +22,7 @@
           </a>
           
           <button id="menu">
-            <span aria-hidden="true">☰</span>
+            <i class="fas fa-bars"></i>
           </button>
           
         </div>
@@ -46,7 +46,11 @@
               src="{% static '/skillsgraph/img/' %}{{category.0}}.svg"
               alt="{{category.0}}'.svg'"
             />
+            {% if category_selected != category.0 %}
             <span class="icon-title">{{category.1}}</span> 
+            {% else %}
+            <span class="icon-title"><strong>{{category.1}}</strong></span> 
+            {% endif %}
 
           </a>
           {% endfor %}
@@ -120,8 +124,14 @@
 
           category_select.addEventListener("change", function () {
             let cat_selected = category_select.value;
-            let url = "/skills/" + cat_selected;
-            window.location.href = url;
+            if (cat_selected != "jobs"){
+              let url = "/skills/" + cat_selected;
+              window.location.href = url;
+            }else{
+              let url = "/" + cat_selected;
+              window.location.href = url;
+            }
+         
 
           });
           menu_btn.addEventListener("click", function () {
@@ -223,6 +233,8 @@
           }
         }
       });
+      console.log("Jak coś to ja was chłopaki z justjoin.it kocham, kozaki jesteście ;) i generalnie super robotę robicie <3");
+      console.log("a tak to w sumie pracki szukam, jakby ktoś potrzebował pracownika, to dajcie znać adrian@wloszynski.pl")
     </script>
   </body>
   {% endblock %}

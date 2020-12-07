@@ -1,128 +1,233 @@
-{% extends './base.html' %}
-
-
+{% extends 'skillsgraph/head.html' %}
+{% load static %}
 {% block content %}
-<div class="row">
-  <div class="col-sm">
-  <div class="container scroll" style="padding:0px 50px 100px 100px">
-  <table class="table table-striped table-hover ">
-      <thead class="thead-light">
-      <tr>
-        <th>Job name</th>
-        <th>Counter</th>
-      </tr>
-      </thead>    
-      {% for row in rows %}
-      <tr>
-          {% for row_content in row %}
-          <td> {{ row_content }}</td>
+  <body>
+    <div id="root" class="flex-container">
+      <div class="top flex-item">
+        <div>
+          <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
+          <span class="subtext">#1 Stats Job Board <span id="for-it">for IT</span><span id="added-subtext"> Industry in Poland</span></span>
+        </div>
+        <div>
+          <a href="https://github.com/wloszynski" target="_blank">
+            <button class="social-icons">
+              <i class="fab fa-github"></i>
+            </button>
+          </a>
+          
+          <a href="https://www.linkedin.com/in/wloszynski/" target="_blank">
+            <button class="social-icons">
+              <i class="fab fa-linkedin"></i>
+            </button>
+          </a>
+          
+          <button id="menu">
+            <i class="fas fa-bars"></i>
+          </button>
+          
+        </div>
+      </div>
+      <div class="options flex-item">
+
+        <a class="link-icon" href="/jobs">
+          <img
+            class="small-icon"
+            src="{% static '/skillsgraph/img/' %}job.svg"
+            alt="job.svg"
+          />
+          <span class="icon-title"><strong>Jobs</strong></span> 
+
+        </a>
+
+          {% for category in categories_zipped %}
+          <a class="link-icon" href="/skills/{{category.0}}">
+            <img
+              class="small-icon"
+              src="{% static '/skillsgraph/img/' %}{{category.0}}.svg"
+              alt="{{category.0}}'.svg'"
+            />
+            <span class="icon-title">{{category.1}}</span> 
+
+          </a>
           {% endfor %}
-      </tr>
-      {% endfor %}
-    </table>
-  </div>
-</div>
-<div class="col-sm">
-  <div class="container" style="padding:0px 50px 100px 100px">
-    <canvas id="myChart">
-    </canvas>
-  </div>
-</div>
-</div>
-<script>
-  let myChart = document.getElementById('myChart').getContext('2d');
-
-  // Global Options
-  Chart.defaults.global.defaultFontFamily = 'Lato';
-  Chart.defaults.global.defaultFontSize = 18;
-  Chart.defaults.global.defaultFontColor = '#777';
-
-  let massPopChart = new Chart(myChart, {
-    type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-    data:{
-      labels:[{% for row in rows %}
-      "{{ row.0 }}",
-      {% endfor %}
+          <select name="category" class="link-list" onchange="goToCategory()">
+            <option value="jobs" selected>Jobs</option>
+            {% for category in categories %}
+            <option value="{{ category }}">{{ category|title }}</option>
+            {% endfor %}
+          </select>
+      </div>
+      <div class="content flex-item items-container">
+        <div class="num-app">
+          <a class="num-app-link">
+            <div>num of appearances</div>
+          </a>
+          <img
+            class="chart-icon"
+            src="{% static 'skillsgraph/img/graph.svg' %}"
+            alt="chart"
+          />
+        </div>
+        <div class="flex-container skill-items ">
+          {% for row in all_rows %}
+          <div class="top flex-item item">
+            <span class="item-title"> {{ row.0|upper }}</span>
+            <span class="item-count"> {{ row.1 }}</span>
+          </div>
+          {% endfor %}
+        </div>
+     
+      </div>
+      <div
+        class="content flex-item items-container chart-div"
+        style="display: none"
+      >
+        <div class="num-app" id="back-btn-background">
+          <button id="back-chart-btn"><span><img src="{% static 'skillsgraph/img/left-arrow.svg' %}" alt="back-arrow" class="chart-icon"></span></button>
+        </div>
+        <div class="flex-container">
+          <canvas id="myChart"></canvas>
+        </div>
+      </div>
+    </div>
     
-    ],
-      datasets:[{
-        label:'{{ category }}',
-        data:[
-        {% for row in rows %}
-            {{ row.1 }},
-        {% endfor %}
+    <script>
+          const chart_button = document.querySelector(".chart-icon");
+          const content_div = document.querySelector(".content");
+          const chart_div = document.querySelector(".chart-div");
+          const back_chart_button = document.querySelector("#back-chart-btn");
+          const category_select = document.querySelector('.link-list');
+          const b_btn_bg = document.querySelector('#back-btn-background');
+          const menu_btn = document.querySelector('#menu');
+
+          const jokes_list = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
+
+          chart_button.addEventListener("click", function () {
+            content_div.style.display = "none";
+            chart_div.style.display = "block";
+            b_btn_bg.style.backgroundColor= "#f2f5f7";
+          });
+          back_chart_button.addEventListener("click", function () {
+            content_div.style.display = "block";
+            chart_div.style.display = "none";
+            b_btn_bg.style.backgroundColor= "#fffff";
+
+          });
+
+          category_select.addEventListener("change", function () {
+            let cat_selected = category_select.value;
+            if (cat_selected != "jobs"){
+              let url = "/skills/" + cat_selected;
+              window.location.href = url;
+            }else{
+              let url = "/" + cat_selected;
+              window.location.href = url;
+            }
+         
+
+          });
+          menu_btn.addEventListener("click", function () {
+            alert(jokes_list[Math.floor(Math.random() * jokes_list.length)]+"\n\nTam kiedyś będzie menu");
+          });
+
+          let myChart = document.getElementById('myChart').getContext('2d');
+
+      // Global Options
+      Chart.defaults.global.defaultFontFamily = 'Lato';
+      Chart.defaults.global.defaultFontSize = 18;
+      Chart.defaults.global.defaultFontColor = '#777';
+
+      let massPopChart = new Chart(myChart, {
+        type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+        data:{
+          labels:[{% for row in rows %}
+          "{{ row.0 }}",
+          {% endfor %}
+
         ],
-        //backgroundColor:'green',
-        backgroundColor:[
-        'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 99, 132, 0.6)',
-          'rgba(54, 162, 235, 0.6)',
-          'rgba(255, 206, 86, 0.6)',
-          'rgba(75, 192, 192, 0.6)',
-          'rgba(153, 102, 255, 0.6)',
-          'rgba(255, 159, 64, 0.6)',
-          'rgba(255, 0, 0, 1)',
-        ],
-        borderWidth:1,
-        borderColor:'#777',
-        hoverBorderWidth:3,
-        hoverBorderColor:'#000'
-      }]
-    },
-    options:{
-      title:{
-        display:true,
-        text:'Most wanted technologies',
-        fontSize:25
-      },
-      legend:{
-        display:false,
-        position:'right',
-        labels:{
-          fontColor:'#000'
+          datasets:[{
+            label:'{{ category }}',
+            data:[
+            {% for row in rows %}
+              {{ row.1 }},
+            {% endfor %}
+            ],
+            //backgroundColor:'green',
+            backgroundColor:[
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 99, 132, 0.6)',
+              'rgba(54, 162, 235, 0.6)',
+              'rgba(255, 206, 86, 0.6)',
+              'rgba(75, 192, 192, 0.6)',
+              'rgba(153, 102, 255, 0.6)',
+              'rgba(255, 159, 64, 0.6)',
+              'rgba(255, 0, 0, .6)',
+
+            ],
+            borderWidth:1,
+            borderColor:'#777',
+            hoverBorderWidth:3,
+            hoverBorderColor:'#000'
+          }]
+        },
+        options:{
+          title:{
+            display:true,
+            text:'Most wanted skills in {{ category }}',
+            fontSize:25
+          },
+          legend:{
+            display:false,
+            position:'right',
+            labels:{
+              fontColor:'#000'
+            }
+          },
+          layout:{
+            padding:{
+              left:0,
+              right:0,
+              bottom:0,
+              top:0
+            }
+          },
+          tooltips:{
+            enabled:true
+          }
         }
-      },
-      layout:{
-        padding:{
-          left:50,
-          right:0,
-          bottom:0,
-          top:0
-        }
-      },
-      tooltips:{
-        enabled:true
-      }
-    }
-  });
-</script>
-{% endblock %}
+      });
+      console.log("Jak coś to ja was chłopaki z justjoin.it kocham, kozaki jesteście ;) i generalnie super robotę robicie <3");
+      console.log("a tak to w sumie pracki szukam, jakby ktoś potrzebował pracownika, to dajcie znać adrian@wloszynski.pl")
+    </script>
+  </body>
+  {% endblock %}
+</html>
