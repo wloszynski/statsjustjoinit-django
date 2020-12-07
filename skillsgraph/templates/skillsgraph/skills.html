@@ -5,16 +5,39 @@
     <div id="root" class="flex-container">
       <div class="top flex-item">
         <div>
-          <span class="logo">statsjustjoin.it</span>
-          <span class="subtext">#1 Stats Job Board for IT industry</span>
+          <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
+          <span class="subtext">#1 Stats Job Board for IT<span id="added-subtext"> Industry in Poland</span></span>
         </div>
         <div>
+          <a href="https://github.com/wloszynski" target="_blank">
+            <button class="social-icons">
+              <i class="fab fa-github"></i>
+            </button>
+          </a>
+          
+          <a href="https://www.linkedin.com/in/wloszynski/" target="_blank">
+            <button class="social-icons">
+              <i class="fab fa-linkedin"></i>
+            </button>
+          </a>
+          
           <button id="menu">
             <span aria-hidden="true">☰</span>
           </button>
+          
         </div>
       </div>
       <div class="options flex-item">
+
+        <a class="link-icon" href="/jobs">
+          <img
+            class="small-icon"
+            src="{% static '/skillsgraph/img/' %}job.svg"
+            alt="job.svg"
+          />
+          <span class="icon-title">Jobs</span> 
+
+        </a>
 
           {% for category in categories_zipped %}
           <a class="link-icon" href="/skills/{{category.0}}">
@@ -28,6 +51,7 @@
           </a>
           {% endfor %}
           <select name="category" class="link-list" onchange="goToCategory()">
+            <option value="jobs" selected>Jobs</option>
             {% for category in categories %}
             {% if category_selected == category %}
             <option value="{{ category }}" selected>{{ category|title }}</option>
@@ -44,51 +68,63 @@
           </a>
           <img
             class="chart-icon"
-            src="{% static 'skillsgraph/img/pie-chart.svg' %}"
+            src="{% static 'skillsgraph/img/graph.svg' %}"
             alt="chart"
           />
         </div>
-        <div class="flex-container">
+        <div class="flex-container skill-items ">
           {% for row in all_rows %}
           <div class="top flex-item item">
-            <span> {{ row.0|upper }}</span>
-            <span> {{ row.1 }}</span>
+            <span class="item-title"> {{ row.0|upper }}</span>
+            <span class="item-count"> {{ row.1 }}</span>
           </div>
           {% endfor %}
         </div>
+     
       </div>
       <div
         class="content flex-item items-container chart-div"
         style="display: none"
       >
-        <div class="num-app">
-          <button id="back-chart-btn"><span>back</span></button>
+        <div class="num-app" id="back-btn-background">
+          <button id="back-chart-btn"><span><img src="{% static 'skillsgraph/img/left-arrow.svg' %}" alt="back-arrow" class="chart-icon"></span></button>
         </div>
         <div class="flex-container">
           <canvas id="myChart"></canvas>
         </div>
       </div>
     </div>
+    
     <script>
           const chart_button = document.querySelector(".chart-icon");
           const content_div = document.querySelector(".content");
           const chart_div = document.querySelector(".chart-div");
           const back_chart_button = document.querySelector("#back-chart-btn");
           const category_select = document.querySelector('.link-list');
+          const b_btn_bg = document.querySelector('#back-btn-background');
+          const menu_btn = document.querySelector('#menu');
+
 
           chart_button.addEventListener("click", function () {
             content_div.style.display = "none";
             chart_div.style.display = "block";
+            b_btn_bg.style.backgroundColor= "#f2f5f7";
           });
           back_chart_button.addEventListener("click", function () {
             content_div.style.display = "block";
             chart_div.style.display = "none";
+            b_btn_bg.style.backgroundColor= "#fffff";
+
           });
 
           category_select.addEventListener("change", function () {
             let cat_selected = category_select.value;
             let url = "/skills/" + cat_selected;
             window.location.href = url;
+
+          });
+          menu_btn.addEventListener("click", function () {
+            alert("Kiedys tutaj będzie menu")
 
           });
 
