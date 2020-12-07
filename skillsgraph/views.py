@@ -40,7 +40,7 @@ def dataPrint(request, category):
             sum_rest_rows += row[1]
         rows.append(('rest', sum_rest_rows))
 
-    return render(request, 'skillsgraph/mobile.html', {'categories':categories,'rows':rows, 'category_selected':category, 'all_rows':all_rows})
+    return render(request, 'skillsgraph/skills.html', {'categories':categories,'rows':rows, 'category_selected':category, 'all_rows':all_rows})
 
 
 def jobs(request):
