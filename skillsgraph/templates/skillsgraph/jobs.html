@@ -99,42 +99,42 @@
     </main>
 
     <script>
-          const chart_button = document.querySelector(".chart-icon");
-          const content_div = document.querySelector(".content");
-          const chart_div = document.querySelector(".chart-div");
-          const back_chart_button = document.querySelector("#back-chart-btn");
-          const category_select = document.querySelector('.link-list');
-          const b_btn_bg = document.querySelector('#back-btn-background');
-          const menu_btn = document.querySelector('#menu');
+          const chartButton = document.querySelector(".chart-icon");
+          const contentDiv = document.querySelector(".content");
+          const chartDiv = document.querySelector(".chart-div");
+          const backChartButton = document.querySelector("#back-chart-btn");
+          const categorySelect = document.querySelector('.link-list');
+          const bBtnBg = document.querySelector('#back-btn-background');
+          const menuBtn = document.querySelector('#menu');
 
-          const jokes_list = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
+          const jokesList = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
 
-          chart_button.addEventListener("click", function () {
-            content_div.style.display = "none";
-            chart_div.style.display = "block";
-            b_btn_bg.style.backgroundColor= "#f2f5f7";
+          chartButton.addEventListener("click", function () {
+            contentDiv.style.display = "none";
+            chartDiv.style.display = "block";
+            bBtnBg.style.backgroundColor= "#f2f5f7";
           });
-          back_chart_button.addEventListener("click", function () {
-            content_div.style.display = "block";
-            chart_div.style.display = "none";
-            b_btn_bg.style.backgroundColor= "#fffff";
+          backChartButton.addEventListener("click", function () {
+            contentDiv.style.display = "block";
+            chartDiv.style.display = "none";
+            bBtnBg.style.backgroundColor= "#fffff";
 
           });
 
-          category_select.addEventListener("change", function () {
-            let cat_selected = category_select.value;
-            if (cat_selected != "jobs"){
-              let url = "/skills/" + cat_selected;
+          categorySelect.addEventListener("change", function () {
+            let catSelected = categorySelect.value;
+            if (catSelected != "jobs"){
+              let url = "/skills/" + catSelected;
               window.location.href = url;
             }else{
-              let url = "/" + cat_selected;
+              let url = "/" + catSelected;
               window.location.href = url;
             }
 
 
           });
-          menu_btn.addEventListener("click", function () {
-            alert(jokes_list[Math.floor(Math.random() * jokes_list.length)]+"\n\nTam kiedyś będzie menu");
+          menuBtn.addEventListener("click", function () {
+            alert(jokesList[Math.floor(Math.random() * jokesList.length)]+"\n\nTam kiedyś będzie menu");
           });
 
           let myChart = document.getElementById('myChart').getContext('2d');
