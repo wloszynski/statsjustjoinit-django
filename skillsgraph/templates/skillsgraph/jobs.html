@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <body>
-    <div id="root" class="flex-container">
+    <main id="root" class="flex-container">
       <header class="top flex-item">
         <div>
           <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
@@ -14,20 +14,20 @@
               <i class="fab fa-github"></i>
             </button>
           </a>
-          
+
           <a href="https://www.linkedin.com/in/wloszynski/" target="_blank">
             <button class="social-icons">
               <i class="fab fa-linkedin"></i>
             </button>
           </a>
-          
+
           <button id="menu">
             <i class="fas fa-bars"></i>
           </button>
-          
+
         </div>
       </header>
-      <div class="options flex-item">
+      <nav class="options flex-item">
 
         <a class="link-icon" href="/jobs">
           <img
@@ -35,7 +35,7 @@
             src="{% static '/skillsgraph/img/' %}job.svg"
             alt="job.svg"
           />
-          <span class="icon-title"><strong>Jobs</strong></span> 
+          <span class="icon-title"><strong>Jobs</strong></span>
 
         </a>
 
@@ -46,7 +46,7 @@
               src="{% static '/skillsgraph/img/' %}{{category.0}}.svg"
               alt="{{category.0}}'.svg'"
             />
-            <span class="icon-title">{{category.1}}</span> 
+            <span class="icon-title">{{category.1}}</span>
 
           </a>
           {% endfor %}
@@ -56,7 +56,7 @@
             <option value="{{ category }}">{{ category|title }}</option>
             {% endfor %}
           </select>
-      </div>
+      </nav>
       <div class="content flex-item items-container">
         <div class="num-app">
           <a class="num-app-link">
@@ -65,7 +65,7 @@
           <img
             class="chart-icon"
             src="{% static 'skillsgraph/img/graph.svg' %}"
-            alt="chart" 
+            alt="chart"
           />
         </div>
         <div class="flex-container-content skill-items ">
@@ -81,9 +81,9 @@
           <canvas id="myChart"></canvas>
 
           </section>
-          
+
         </div>
-     
+
       </div>
       <div
         class="content flex-item items-container chart-div"
@@ -96,8 +96,8 @@
           <canvas id="myChart_2"></canvas>
         </div>
       </div>
-    </div>
-    
+    </main>
+
     <script>
           const chart_button = document.querySelector(".chart-icon");
           const content_div = document.querySelector(".content");
@@ -130,7 +130,7 @@
               let url = "/" + cat_selected;
               window.location.href = url;
             }
-         
+
 
           });
           menu_btn.addEventListener("click", function () {
@@ -324,7 +324,7 @@
       });
 
 
-      
+
 
       console.log("Jak coś to ja was chłopaki z justjoin.it kocham, kozaki jesteście ;) i generalnie super robotę robicie <3");
       console.log("a tak to w sumie pracki szukam, jakby ktoś potrzebował pracownika, to dajcie znać adrian@wloszynski.pl")

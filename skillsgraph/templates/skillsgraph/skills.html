@@ -2,7 +2,7 @@
 {% load static %}
 {% block content %}
   <body>
-    <div id="root" class="flex-container">
+    <main id="root" class="flex-container">
       <header class="top flex-item">
         <div>
           <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
@@ -19,14 +19,14 @@
               <i class="fab fa-linkedin"></i>
             </button>
           </a>
-          
+
           <button id="menu">
             <i class="fas fa-bars"></i>
           </button>
-          
+
         </div>
       </header>
-      <div class="options flex-item">
+      <nav class="options flex-item">
 
         <a class="link-icon" href="/jobs">
           <img
@@ -34,7 +34,7 @@
             src="{% static '/skillsgraph/img/' %}job.svg"
             alt="job.svg"
           />
-          <span class="icon-title">Jobs</span> 
+          <span class="icon-title">Jobs</span>
 
         </a>
 
@@ -46,9 +46,9 @@
               alt="{{category.0}}'.svg'"
             />
             {% if category_selected != category.0 %}
-            <span class="icon-title">{{category.1}}</span> 
+            <span class="icon-title">{{category.1}}</span>
             {% else %}
-            <span class="icon-title"><strong>{{category.1}}</strong></span> 
+            <span class="icon-title"><strong>{{category.1}}</strong></span>
             {% endif %}
 
           </a>
@@ -63,7 +63,7 @@
             {% endif %}
             {% endfor %}
           </select>
-      </div>
+      </nav>
       <div class="content flex-item items-container">
         <div class="num-app">
           <a class="num-app-link">
@@ -86,10 +86,10 @@
           </div>
           <div class="flex-item-content-chart">
             <canvas id="myChart"></canvas>
-  
+
             </div>
         </div>
-     
+
       </div>
       <div
         class="content flex-item items-container chart-div"
@@ -102,8 +102,8 @@
           <canvas id="myChart_2"></canvas>
         </div>
       </div>
-    </div>
-    
+    </main>
+
     <script>
           const chart_button = document.querySelector(".chart-icon");
           const content_div = document.querySelector(".content");
@@ -136,7 +136,7 @@
               let url = "/" + cat_selected;
               window.location.href = url;
             }
-         
+
 
           });
           menu_btn.addEventListener("click", function () {
