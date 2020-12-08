@@ -5,6 +5,7 @@ html {
   font-family: Roboto;
 }
 
+
 a {
   text-decoration: none;
   color: black;
@@ -20,6 +21,7 @@ span.logo {
   padding-left: 2vh;
   font-family: "Hind", sans-serif;
 }
+
 .item span {
   font-size: 1.5em;
 }
@@ -72,7 +74,7 @@ span.logo {
   flex-basis: auto;
   align-self: auto;
   order: 0;
-  width:40%;
+  width: 40%;
 }
 
 .flex-item-content-chart {
@@ -83,13 +85,10 @@ span.logo {
   align-self: auto;
   order: 0;
   width: 60%;
-  margin-top:10vh;
+  margin-top: 10vh;
 }
 
-.full-width{
-  width:100%;
-}
-div.top {
+.top {
   display: flex;
   justify-content: space-between;
   height: 8vh;
@@ -116,7 +115,6 @@ div.num-app {
   border: 0;
   background-color: #f2f5f7;
   cursor: pointer;
-
 }
 
 div.content {
@@ -168,11 +166,11 @@ button.button-circle {
   padding: 7px;
 }
 
-.scroll{
-    height: 80vh;
-    overflow-x: hidden;
-    overflow-y: auto;
-    text-align: justify;
+.scroll {
+  height: 80vh;
+  overflow-x: hidden;
+  overflow-y: auto;
+  text-align: justify;
 }
 img.small-icon {
   height: 4.5vh;
@@ -180,8 +178,8 @@ img.small-icon {
   padding-right: 10px;
   padding-top: 10px;
 }
-.chart-icon{
-  display:none;
+.chart-icon {
+  display: none;
 }
 select {
   margin-top: 10px;
@@ -225,12 +223,11 @@ a.link-icon {
   a.link-icon {
     display: none;
   }
- 
 }
 
 @media only screen and (max-width: 800px) {
   img.chart-icon {
-    display:block;
+    display: block;
     height: 3.5vh;
     width: 3.5vh;
     padding-right: 10px;
@@ -238,30 +235,28 @@ a.link-icon {
     cursor: pointer;
   }
 
-.flex-item-content-count {
-  display: block;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-  width:100%;
-}
+  .flex-item-content-count {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    width: 100%;
+  }
 
-.flex-item-content-chart {
-  display: block;
-  flex-grow: 0;
-  flex-shrink: 1;
-  flex-basis: auto;
-  align-self: auto;
-  order: 0;
-  width: 0%;
+  .flex-item-content-chart {
+    display: block;
+    flex-grow: 0;
+    flex-shrink: 1;
+    flex-basis: auto;
+    align-self: auto;
+    order: 0;
+    width: 0%;
+  }
 }
-}
-
 
 @media only screen and (max-width: 668px) {
-  
   #added-subtext {
     display: none;
   }

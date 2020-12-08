@@ -3,7 +3,7 @@
 {% block content %}
   <body>
     <div id="root" class="flex-container">
-      <div class="top flex-item">
+      <header class="top flex-item">
         <div>
           <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
           <span class="subtext">#1 Stats Job Board <span id="for-it">for IT</span><span id="added-subtext"> Industry in Poland</span></span>
@@ -26,7 +26,7 @@
           </button>
           
         </div>
-      </div>
+      </header>
       <div class="options flex-item">
 
         <a class="link-icon" href="/jobs">
@@ -50,7 +50,7 @@
 
           </a>
           {% endfor %}
-          <select name="category" class="link-list" onchange="goToCategory()">
+          <select name="category" class="link-list">
             <option value="jobs" selected>Jobs</option>
             {% for category in categories %}
             <option value="{{ category }}">{{ category|title }}</option>
@@ -69,18 +69,18 @@
           />
         </div>
         <div class="flex-container-content skill-items ">
-          <div class="flex-item-content-count scroll">
+          <section class="flex-item-content-count scroll">
             {% for row in all_rows %}
             <div class="top flex-item item">
               <span class="item-title"> {{ row.0|upper }}</span>
               <span class="item-count"> {{ row.1 }}</span>
             </div>
             {% endfor %}
-          </div>
-          <div class="flex-item-content-chart">
+          </section>
+          <section class="flex-item-content-chart">
           <canvas id="myChart"></canvas>
 
-          </div>
+          </section>
           
         </div>
      

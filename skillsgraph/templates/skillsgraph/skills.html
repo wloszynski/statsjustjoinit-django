@@ -3,7 +3,7 @@
 {% block content %}
   <body>
     <div id="root" class="flex-container">
-      <div class="top flex-item">
+      <header class="top flex-item">
         <div>
           <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
           <span class="subtext">#1 Stats Job Board <span id="for-it">for IT</span><span id="added-subtext"> Industry in Poland</span></span>
@@ -14,7 +14,6 @@
               <i class="fab fa-github"></i>
             </button>
           </a>
-          
           <a href="https://www.linkedin.com/in/wloszynski/" target="_blank">
             <button class="social-icons">
               <i class="fab fa-linkedin"></i>
@@ -26,7 +25,7 @@
           </button>
           
         </div>
-      </div>
+      </header>
       <div class="options flex-item">
 
         <a class="link-icon" href="/jobs">
@@ -54,7 +53,7 @@
 
           </a>
           {% endfor %}
-          <select name="category" class="link-list" onchange="goToCategory()">
+          <select name="category" class="link-list">
             <option value="jobs" selected>Jobs</option>
             {% for category in categories %}
             {% if category_selected == category %}
