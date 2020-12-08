@@ -15,7 +15,7 @@ def dataPrint(request, category):
     categories_menu = ['All', 'JS', 'HTML', 'PHP', 'Ruby', 'Python', 'Java', '.Net', 'Scala', 'C', 'Mobile', 'Testing', 'DevOps', 'UX/UI', 'PM', 'Game', 'Analytics', 'Security', 'Data', 'Go', 'SAP', 'Support', 'Other']
 
     # now_date = str(datetime.datetime.now()).split(' ')[0]
-    conn = sqlite3.connect('skill_counter_all.sqlite')
+    conn = sqlite3.connect('skill_counter.sqlite')
     cur = conn.cursor()
 
     cur.execute('SELECT id FROM language WHERE name like ?',(category,))
@@ -26,7 +26,7 @@ def dataPrint(request, category):
         SELECT skill.name, overtime_skills.counter
         FROM overtime_skills
         INNER JOIN skill ON skill.id=overtime_skills.skill_id
-        WHERE overtime_skills.language_id like ?
+        WHERE overtime_skills.language_id like ? AND date_created like "2020-12-07"
     ''', (cat_id,))
 
     rows = dict(cur.fetchall())
@@ -51,13 +51,14 @@ def jobs(request):
 
 
     now_date = str(datetime.datetime.now()).split(' ')[0]
-    conn = sqlite3.connect('skill_counter_all.sqlite')
+    conn = sqlite3.connect('skill_counter.sqlite')
     cur = conn.cursor()
 
     cur.execute('''
         SELECT language.name, overtime_jobs.counter
         FROM overtime_jobs 
         INNER JOIN language ON language.id=overtime_jobs.language_id
+        WHERE date_created like "2020-12-07"
     ''')
     
     rows = dict(cur.fetchall()[1:])
