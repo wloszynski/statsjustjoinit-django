@@ -67,11 +67,7 @@
       <div class="num-app" id="back-btn-background">
         <button id="back-chart-btn">
           <span
-            ><img
-              src="{% static 'skillsgraph/img/left-arrow.svg' %}"
-              alt="back-arrow"
-              class="chart-icon"
-          /></span>
+            ><i class="fas fa-arrow-left arrow-btn"></i></span>
         </button>
       </div>
       <div class="flex-container" style="height: 45vh">
@@ -89,17 +85,23 @@
         const bBtnBg = document.querySelector('#back-btn-background');
         const menuBtn = document.querySelector('#menu');
 
+        const moon = document.querySelector("#moon");
+        const sun = document.querySelector("#sun")
+        const theme_button = document.querySelector("#theme")
+
         const jokesList = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
 
         chartButton.addEventListener("click", () => {
           contentDiv.style.display = "none";
           chartDiv.style.display = "block";
-          bBtnBg.style.backgroundColor= "#f2f5f7";
+          if(moon.style.display == "block"){
+            bBtnBg.style.backgroundColor = "#f2f5f7";
+          }
+
         });
         backChartButton.addEventListener("click", () => {
           contentDiv.style.display = "block";
           chartDiv.style.display = "none";
-          bBtnBg.style.backgroundColor= "#fffff";
 
         });
 
@@ -120,9 +122,6 @@
         });
 
 
-        const moon = document.querySelector("#moon");
-        const sun = document.querySelector("#sun")
-        const theme_button = document.querySelector("#theme")
 
 
 

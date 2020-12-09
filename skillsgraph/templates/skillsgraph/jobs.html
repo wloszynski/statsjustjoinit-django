@@ -1,358 +1,356 @@
-{% extends 'skillsgraph/head.html' %}
-{% load static %}
-{% block content %}
-  <body>
-    <main id="root" class="flex-container">
-      {% include 'skillsgraph/header.html' %}
-      <nav class="options flex-item">
+{% extends 'skillsgraph/head.html' %} {% load static %} {% block content %}
+<body>
+  <main id="root" class="flex-container">
+    {% include 'skillsgraph/header.html' %}
+    <nav class="options flex-item">
+      <a class="link-icon" href="/jobs">
+        <img
+          class="small-icon"
+          src="{% static '/skillsgraph/img/' %}job.svg"
+          alt="job.svg"
+        />
+        <span class="icon-title"><strong>Jobs</strong></span>
+      </a>
 
-        <a class="link-icon" href="/jobs">
-          <img
-            class="small-icon"
-            src="{% static '/skillsgraph/img/' %}job.svg"
-            alt="job.svg"
-          />
-          <span class="icon-title"><strong>Jobs</strong></span>
-
+      {% for category in categories_zipped %}
+      <a class="link-icon" href="/skills/{{category.0}}">
+        <img
+          class="small-icon"
+          src="{% static '/skillsgraph/img/' %}{{category.0}}.svg"
+          alt="{{category.0}}'.svg'"
+        />
+        <span class="icon-title">{{category.1}}</span>
+      </a>
+      {% endfor %}
+      <select name="category" class="link-list">
+        <option value="jobs" selected>Jobs</option>
+        {% for category in categories %}
+        <option value="{{ category }}">{{ category|title }}</option>
+        {% endfor %}
+      </select>
+    </nav>
+    <div class="content flex-item items-container">
+      <div class="num-app">
+        <a class="num-app-link">
+          <div>appearances</div>
         </a>
-
-          {% for category in categories_zipped %}
-          <a class="link-icon" href="/skills/{{category.0}}">
-            <img
-              class="small-icon"
-              src="{% static '/skillsgraph/img/' %}{{category.0}}.svg"
-              alt="{{category.0}}'.svg'"
-            />
-            <span class="icon-title">{{category.1}}</span>
-
-          </a>
+        <img
+          class="chart-icon"
+          src="{% static 'skillsgraph/img/graph.svg' %}"
+          alt="chart"
+        />
+      </div>
+      <div class="flex-container-content skill-items">
+        <section class="flex-item-content-count scroll">
+          {% for row in all_rows %}
+          <div class="top flex-item item">
+            <span class="item-title"> {{ row.0|upper }}</span>
+            <span class="item-count"> {{ row.1 }}</span>
+          </div>
           {% endfor %}
-          <select name="category" class="link-list">
-            <option value="jobs" selected>Jobs</option>
-            {% for category in categories %}
-            <option value="{{ category }}">{{ category|title }}</option>
-            {% endfor %}
-          </select>
-      </nav>
-      <div class="content flex-item items-container">
-        <div class="num-app">
-          <a class="num-app-link">
-            <div>appearances</div>
-          </a>
-          <img
-            class="chart-icon"
-            src="{% static 'skillsgraph/img/graph.svg' %}"
-            alt="chart"
-          />
-        </div>
-        <div class="flex-container-content skill-items ">
-          <section class="flex-item-content-count scroll">
-            {% for row in all_rows %}
-            <div class="top flex-item item">
-              <span class="item-title"> {{ row.0|upper }}</span>
-              <span class="item-count"> {{ row.1 }}</span>
-            </div>
-            {% endfor %}
-          </section>
-          <section class="flex-item-content-chart">
+        </section>
+        <section class="flex-item-content-chart">
           <canvas id="myChart"></canvas>
-
-          </section>
-
-        </div>
-
+        </section>
       </div>
-      <div
-        class="content flex-item items-container chart-div"
-        style="display: none"
-      >
-        <div class="num-app" id="back-btn-background">
-          <button id="back-chart-btn"><span><img src="{% static 'skillsgraph/img/left-arrow.svg' %}" alt="back-arrow" class="chart-icon"></span></button>
-        </div>
-        <div class="flex-container" style="height: 45vh;">
-          <canvas id="myChart_2"></canvas>
-        </div>
+    </div>
+    <div
+      class="content flex-item items-container chart-div"
+      style="display: none"
+    >
+      <div class="num-app" id="back-btn-background">
+        <button id="back-chart-btn">
+          <span
+            ><i class="fas fa-arrow-left arrow-btn"></i></span>
+        </button>
       </div>
-    </main>
+      <div class="flex-container" style="height: 45vh">
+        <canvas id="myChart_2"></canvas>
+      </div>
+    </div>
+  </main>
 
-    <script>
-          const chartButton = document.querySelector(".chart-icon");
-          const contentDiv = document.querySelector(".content");
-          const chartDiv = document.querySelector(".chart-div");
-          const backChartButton = document.querySelector("#back-chart-btn");
-          const categorySelect = document.querySelector('.link-list');
-          const bBtnBg = document.querySelector('#back-btn-background');
-          const menuBtn = document.querySelector('#menu');
-
-          const jokesList = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
-
-          chartButton.addEventListener("click", () => {
-            contentDiv.style.display = "none";
-            chartDiv.style.display = "block";
-            bBtnBg.style.backgroundColor= "#f2f5f7";
-          });
-          backChartButton.addEventListener("click", () => {
-            contentDiv.style.display = "block";
-            chartDiv.style.display = "none";
-            bBtnBg.style.backgroundColor= "#fffff";
-
-          });
-
-          categorySelect.addEventListener("change", () => {
-            let catSelected = categorySelect.value;
-            if (catSelected != "jobs"){
-              let url = "/skills/" + catSelected;
-              window.location.href = url;
-            }else{
-              let url = "/" + catSelected;
-              window.location.href = url;
-            }
+  <script>
+        const chartButton = document.querySelector(".chart-icon");
+        const contentDiv = document.querySelector(".content");
+        const chartDiv = document.querySelector(".chart-div");
+        const backChartButton = document.querySelector("#back-chart-btn");
+        const categorySelect = document.querySelector('.link-list');
+        const bBtnBg = document.querySelector('#back-btn-background');
+        const menuBtn = document.querySelector('#menu');
+        const moon = document.querySelector("#moon");
+        const sun = document.querySelector("#sun")
+        const theme_button = document.querySelector("#theme")
 
 
-          });
-          menuBtn.addEventListener("click", () => {
-            alert(jokesList[Math.floor(Math.random() * jokesList.length)]+"\n\nTam kiedyś będzie menu");
-          });
+        const jokesList = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
+
+        chartButton.addEventListener("click", () => {
+          contentDiv.style.display = "none";
+          chartDiv.style.display = "block";
+          chartDiv.style.display = "block";
+        if(moon.style.display == "block"){
+          bBtnBg.style.backgroundColor = "#f2f5f7";
+        }
+        });
+        backChartButton.addEventListener("click", () => {
+          contentDiv.style.display = "block";
+          chartDiv.style.display = "none";
+
+        });
+
+        categorySelect.addEventListener("change", () => {
+          let catSelected = categorySelect.value;
+          if (catSelected != "jobs"){
+            let url = "/skills/" + catSelected;
+            window.location.href = url;
+          }else{
+            let url = "/" + catSelected;
+            window.location.href = url;
+          }
+
+
+        });
+        menuBtn.addEventListener("click", () => {
+          alert(jokesList[Math.floor(Math.random() * jokesList.length)]+"\n\nTam kiedyś będzie menu");
+        });
 
 
 
-          const moon = document.querySelector("#moon");
-          const sun = document.querySelector("#sun")
-          const theme_button = document.querySelector("#theme")
 
 
 
 
-          if(window.localStorage.getItem('theme') == undefined){
-        window.localStorage.setItem('theme', 'light')
+        if(window.localStorage.getItem('theme') == undefined){
+      window.localStorage.setItem('theme', 'light')
+    }else{
+      if(window.localStorage.getItem('theme') == 'light'){
+        sun.style.display = "none";
+        moon.style.display = "block";
+        Chart.defaults.global.defaultFontColor = 'black';
       }else{
-        if(window.localStorage.getItem('theme') == 'light'){
-          sun.style.display = "none";
+        sun.style.display = "block";
+        moon.style.display = "none";
+        Chart.defaults.global.defaultFontColor = '#d5d5d5';
+      }
+    }
+
+
+      theme_button.addEventListener("click", () => {
+        if (moon.style.display == "none"){
           moon.style.display = "block";
-          Chart.defaults.global.defaultFontColor = 'black';
+          sun.style.display = "none";
+          window.localStorage.setItem('theme', 'light')
+          css_link.href = "{% static '/skillsgraph/css/light_theme.css' %}";
+
+
         }else{
-          sun.style.display = "block";
           moon.style.display = "none";
-          Chart.defaults.global.defaultFontColor = '#d5d5d5';
+          sun.style.display = "block";
+          window.localStorage.setItem('theme', 'dark')
+          css_link.href = "{% static '/skillsgraph/css/dark_theme.css' %}";
+
+        }
+
+        location.reload();
+      })
+
+
+
+      let myChart = document.getElementById('myChart').getContext('2d');
+
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Roboto';
+    Chart.defaults.global.defaultFontSize = 18;
+
+    let massPopChart = new Chart(myChart, {
+      type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:[{% for row in rows %}
+        "{{ row.0 }}",
+        {% endfor %}
+
+      ],
+        datasets:[{
+          label:'{{ category }}',
+          data:[
+          {% for row in rows %}
+            {{ row.1 }},
+          {% endfor %}
+          ],
+          //backgroundColor:'green',
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 0, 0, .6)',
+
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        responsive: true,
+      maintainAspectRatio: false,
+        title:{
+          display:true,
+          text:'MOST WANTED JOBS',
+          fontSize:25
+        },
+        legend:{
+          display:false,
+          position:'right',
+          labels:{
+            fontColor:'#000'
+          }
+        },
+        layout:{
+          padding:{
+            left:50,
+            right:50,
+            bottom:50,
+            top:50
+          }
+        },
+        tooltips:{
+          enabled:true
         }
       }
+    });
 
+    let myChart2 = document.getElementById('myChart_2').getContext('2d');
+    let massPopChart2 = new Chart(myChart2, {
+      type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
+      data:{
+        labels:[{% for row in rows %}
+        "{{ row.0 }}",
+        {% endfor %}
 
-        theme_button.addEventListener("click", () => {
-          if (moon.style.display == "none"){
-            moon.style.display = "block";
-            sun.style.display = "none";
-            window.localStorage.setItem('theme', 'light')
-            css_link.href = "{% static '/skillsgraph/css/light_theme.css' %}";
-
-
-          }else{
-            moon.style.display = "none";
-            sun.style.display = "block";
-            window.localStorage.setItem('theme', 'dark')
-            css_link.href = "{% static '/skillsgraph/css/dark_theme.css' %}";
-
-          }
-
-          location.reload();
-        })
-
-
-
-        let myChart = document.getElementById('myChart').getContext('2d');
-
-      // Global Options
-      Chart.defaults.global.defaultFontFamily = 'Roboto';
-      Chart.defaults.global.defaultFontSize = 18;
-
-      let massPopChart = new Chart(myChart, {
-        type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-        data:{
-          labels:[{% for row in rows %}
-          "{{ row.0 }}",
+      ],
+        datasets:[{
+          label:'{{ category_selected|upper }}',
+          data:[
+          {% for row in rows %}
+            {{ row.1 }},
           {% endfor %}
+          ],
+          //backgroundColor:'green',
+          backgroundColor:[
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 99, 132, 0.6)',
+            'rgba(54, 162, 235, 0.6)',
+            'rgba(255, 206, 86, 0.6)',
+            'rgba(75, 192, 192, 0.6)',
+            'rgba(153, 102, 255, 0.6)',
+            'rgba(255, 159, 64, 0.6)',
+            'rgba(255, 0, 0, .6)',
 
-        ],
-          datasets:[{
-            label:'{{ category }}',
-            data:[
-            {% for row in rows %}
-              {{ row.1 }},
-            {% endfor %}
-            ],
-            //backgroundColor:'green',
-            backgroundColor:[
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 0, 0, .6)',
-
-            ],
-            borderWidth:1,
-            borderColor:'#777',
-            hoverBorderWidth:3,
-            hoverBorderColor:'#000'
-          }]
+          ],
+          borderWidth:1,
+          borderColor:'#777',
+          hoverBorderWidth:3,
+          hoverBorderColor:'#000'
+        }]
+      },
+      options:{
+        responsive: true,
+      maintainAspectRatio: false,
+        title:{
+          display:true,
+          text:'MOST WANTED JOBS',
+          fontSize:25
         },
-        options:{
-          responsive: true,
-        maintainAspectRatio: false,
-          title:{
-            display:true,
-            text:'MOST WANTED JOBS',
-            fontSize:25
-          },
-          legend:{
-            display:false,
-            position:'right',
-            labels:{
-              fontColor:'#000'
-            }
-          },
-          layout:{
-            padding:{
-              left:50,
-              right:50,
-              bottom:50,
-              top:50
-            }
-          },
-          tooltips:{
-            enabled:true
+        legend:{
+          display:false,
+          position:'right',
+          labels:{
+            fontColor:'#000'
           }
-        }
-      });
-
-      let myChart2 = document.getElementById('myChart_2').getContext('2d');
-      let massPopChart2 = new Chart(myChart2, {
-        type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
-        data:{
-          labels:[{% for row in rows %}
-          "{{ row.0 }}",
-          {% endfor %}
-
-        ],
-          datasets:[{
-            label:'{{ category_selected|upper }}',
-            data:[
-            {% for row in rows %}
-              {{ row.1 }},
-            {% endfor %}
-            ],
-            //backgroundColor:'green',
-            backgroundColor:[
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 99, 132, 0.6)',
-              'rgba(54, 162, 235, 0.6)',
-              'rgba(255, 206, 86, 0.6)',
-              'rgba(75, 192, 192, 0.6)',
-              'rgba(153, 102, 255, 0.6)',
-              'rgba(255, 159, 64, 0.6)',
-              'rgba(255, 0, 0, .6)',
-
-            ],
-            borderWidth:1,
-            borderColor:'#777',
-            hoverBorderWidth:3,
-            hoverBorderColor:'#000'
-          }]
         },
-        options:{
-          responsive: true,
-        maintainAspectRatio: false,
-          title:{
-            display:true,
-            text:'MOST WANTED JOBS',
-            fontSize:25
-          },
-          legend:{
-            display:false,
-            position:'right',
-            labels:{
-              fontColor:'#000'
-            }
-          },
-          layout:{
-            padding:{
-              left:0,
-              right:0,
-              bottom:0,
-              top:0
-            }
-          },
-          tooltips:{
-            enabled:true
+        layout:{
+          padding:{
+            left:0,
+            right:0,
+            bottom:0,
+            top:0
           }
+        },
+        tooltips:{
+          enabled:true
         }
-      });
+      }
+    });
 
 
 
 
-      console.log("Jak coś to ja was chłopaki z justjoin.it kocham, kozaki jesteście ;) i generalnie super robotę robicie <3");
-      console.log("a tak to w sumie pracki szukam, jakby ktoś potrzebował pracownika, to dajcie znać adrian@wloszynski.pl")
-    </script>
-  </body>
-  {% endblock %}
+    console.log("Jak coś to ja was chłopaki z justjoin.it kocham, kozaki jesteście ;) i generalnie super robotę robicie <3");
+    console.log("a tak to w sumie pracki szukam, jakby ktoś potrzebował pracownika, to dajcie znać adrian@wloszynski.pl")
+  </script>
+</body>
+{% endblock %}

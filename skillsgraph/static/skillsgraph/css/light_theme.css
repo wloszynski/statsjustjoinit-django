@@ -130,8 +130,9 @@ div.num-app {
   margin-top: 3vh;
   margin-left: 3vh;
   border: 0;
-  background-color: var(--white-wise);
+  background-color: var(--back-col);
   cursor: pointer;
+  padding:10px;
 }
 
 div.content {
@@ -243,7 +244,7 @@ a.link-icon {
 }
 
 @media only screen and (max-width: 800px) {
-  img.chart-icon {
+  .chart-icon {
     display: block;
     height: 3.5vh;
     width: 3.5vh;
@@ -271,6 +272,11 @@ a.link-icon {
     order: 0;
     width: 0%;
   }
+  .arrow-btn{
+      font-size: 2em;
+      color: var(--black);
+  }
+
 }
 
 @media only screen and (max-width: 668px) {
