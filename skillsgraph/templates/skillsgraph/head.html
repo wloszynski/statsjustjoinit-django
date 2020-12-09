@@ -8,6 +8,7 @@
     <title>
       Stats Just Join IT: #1 Stats Job Board for IT Industry in Poland
     </title>
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
@@ -24,7 +25,25 @@
       href="https://fonts.googleapis.com/css2?family=Hind:wght@700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="{% static '/skillsgraph/css/style.css' %}" />
+   <script src="https://d3js.org/d3.v4.js"></script>
+   <link rel="stylesheet" href="" id="theme-link"/>
+
+   <script>
+     const css_link = document.querySelector("#theme-link")
+
+     if(window.localStorage.getItem('theme') == undefined){
+      window.localStorage.setItem('theme', 'light')
+     }else{
+       if(window.localStorage.getItem('theme') == 'light'){
+        css_link.href = "{% static '/skillsgraph/css/light_theme.css' %}"
+       }else{
+        css_link.href = "{% static '/skillsgraph/css/dark_theme.css' %}"
+
+       }
+
+     }
+
+   </script>
   </head>
   {% block content %}{% endblock %}
 </html>

@@ -3,29 +3,7 @@
 {% block content %}
   <body>
     <main id="root" class="flex-container">
-      <header class="top flex-item">
-        <div>
-          <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
-          <span class="subtext">#1 Stats Job Board <span id="for-it">for IT</span><span id="added-subtext"> Industry in Poland</span></span>
-        </div>
-        <div>
-          <a href="https://github.com/wloszynski" target="_blank">
-            <button class="social-icons">
-              <i class="fab fa-github"></i>
-            </button>
-          </a>
-          <a href="https://www.linkedin.com/in/wloszynski/" target="_blank">
-            <button class="social-icons">
-              <i class="fab fa-linkedin"></i>
-            </button>
-          </a>
-
-          <button id="menu">
-            <i class="fas fa-bars"></i>
-          </button>
-
-        </div>
-      </header>
+      {% include 'skillsgraph/header.html' %}
       <nav class="options flex-item">
 
         <a class="link-icon" href="/jobs">
@@ -67,7 +45,7 @@
       <div class="content flex-item items-container">
         <div class="num-app">
           <a class="num-app-link">
-            <div>num of appearances</div>
+            <div>appearances</div>
           </a>
           <img
             class="chart-icon"
@@ -98,7 +76,7 @@
         <div class="num-app" id="back-btn-background">
           <button id="back-chart-btn"><span><img src="{% static 'skillsgraph/img/left-arrow.svg' %}" alt="back-arrow" class="chart-icon"></span></button>
         </div>
-        <div class="flex-container">
+        <div class="flex-container" style="height: 45vh;">
           <canvas id="myChart_2"></canvas>
         </div>
       </div>
@@ -115,19 +93,19 @@
 
           const jokesList = ["Jak psy coś potrafią, to każdy wie, że to jest ich know-how, ale mało kto wie, że koty mają swoje know-miau","Dlaczego nauczyciele to kiepscy programiści? Bo korzystają tylko z tablic.", "A wiecie jaka jest ulubiona zupa Google Chroma? RAM-en", "Co najbardziej pociąga studentów architektury? BLOCK CHAIN.", "Ulubiona zupa francuzów? Bon Żurek ;)", "Jaka jest ulubiona część lotniska dla programisty? Terminal :D"];
 
-          chartButton.addEventListener("click", function () {
+          chartButton.addEventListener("click", () => {
             contentDiv.style.display = "none";
             chartDiv.style.display = "block";
             bBtnBg.style.backgroundColor= "#f2f5f7";
           });
-          backChartButton.addEventListener("click", function () {
+          backChartButton.addEventListener("click", () => {
             contentDiv.style.display = "block";
             chartDiv.style.display = "none";
             bBtnBg.style.backgroundColor= "#fffff";
 
           });
 
-          categorySelect.addEventListener("change", function () {
+          categorySelect.addEventListener("change", () => {
             let catSelected = categorySelect.value;
             if (catSelected != "jobs"){
               let url = "/skills/" + catSelected;
@@ -139,16 +117,57 @@
 
 
           });
-          menuBtn.addEventListener("click", function () {
+          menuBtn.addEventListener("click", () => {
             alert(jokesList[Math.floor(Math.random() * jokesList.length)]+"\n\nTam kiedyś będzie menu");
           });
 
-          let myChart = document.getElementById('myChart').getContext('2d');
+
+          const moon = document.querySelector("#moon");
+          const sun = document.querySelector("#sun")
+          const theme_button = document.querySelector("#theme")
+
+
+
+          if(window.localStorage.getItem('theme') == undefined){
+          window.localStorage.setItem('theme', 'light')
+        }else{
+          if(window.localStorage.getItem('theme') == 'light'){
+            sun.style.display = "none";
+            moon.style.display = "block";
+            Chart.defaults.global.defaultFontColor = 'black';
+          }else{
+            sun.style.display = "block";
+            moon.style.display = "none";
+            Chart.defaults.global.defaultFontColor = '#d5d5d5';
+          }
+        }
+
+
+          theme_button.addEventListener("click", () => {
+            if (moon.style.display == "none"){
+              moon.style.display = "block";
+              sun.style.display = "none";
+              window.localStorage.setItem('theme', 'light')
+            }else{
+              moon.style.display = "none";
+              sun.style.display = "block";
+              window.localStorage.setItem('theme', 'dark')
+            }
+            location.reload();
+
+          })
+
+
+
+
+
+
+
+      let myChart = document.getElementById('myChart').getContext('2d');
 
       // Global Options
       Chart.defaults.global.defaultFontFamily = 'Roboto';
       Chart.defaults.global.defaultFontSize = 18;
-      Chart.defaults.global.defaultFontColor = 'black';
 
       let massPopChart = new Chart(myChart, {
         type:'pie', // bar, horizontalBar, pie, line, doughnut, radar, polarArea
@@ -213,6 +232,8 @@
           }]
         },
         options:{
+        responsive: true,
+        maintainAspectRatio: false,
           title:{
             display:true,
             text:'MOST WANTED SKILLS IN {{ category_selected|upper }}',
@@ -227,10 +248,10 @@
           },
           layout:{
             padding:{
-              left:0,
-              right:0,
-              bottom:0,
-              top:0
+              left:50,
+              right:50,
+              bottom:50,
+              top:50
             }
           },
           tooltips:{
@@ -303,6 +324,9 @@
           }]
         },
         options:{
+            responsive: true,
+            maintainAspectRatio: false,
+
           title:{
             display:true,
             text:'MOST WANTED SKILLS IN {{ category_selected|upper }}',
@@ -335,4 +359,3 @@
     </script>
   </body>
   {% endblock %}
-</html>
