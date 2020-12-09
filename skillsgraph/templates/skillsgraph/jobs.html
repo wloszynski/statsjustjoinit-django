@@ -123,42 +123,41 @@
 
 
 
-          theme_button.addEventListener("click", () => {
-            if (moon.style.display == "none"){
-              moon.style.display = "block";
-              sun.style.display = "none";
-              window.localStorage.setItem('theme', 'light')
-              css_link.href = "{% static '/skillsgraph/css/light_theme.css' %}"
-
-            }else{
-              moon.style.display = "none";
-              sun.style.display = "block";
-              window.localStorage.setItem('theme', 'dark')
-              css_link.href = "{% static '/skillsgraph/css/dark_theme.css' %}";
-            }
-            location.reload();
-
-          }
-          )
-
-           Chart.defaults.global.defaultFontColor = 'black';
-
-
           if(window.localStorage.getItem('theme') == undefined){
-          window.localStorage.setItem('theme', 'light')
+        window.localStorage.setItem('theme', 'light')
+      }else{
+        if(window.localStorage.getItem('theme') == 'light'){
+          sun.style.display = "none";
+          moon.style.display = "block";
+          Chart.defaults.global.defaultFontColor = 'black';
         }else{
-          if(window.localStorage.getItem('theme') == 'light'){
-            sun.style.display = "none";
+          sun.style.display = "block";
+          moon.style.display = "none";
+          Chart.defaults.global.defaultFontColor = '#d5d5d5';
+        }
+      }
+
+
+        theme_button.addEventListener("click", () => {
+          if (moon.style.display == "none"){
             moon.style.display = "block";
-            Chart.defaults.global.defaultFontColor = 'black';
+            sun.style.display = "none";
+            window.localStorage.setItem('theme', 'light')
+            css_link.href = "{% static '/skillsgraph/css/light_theme.css' %}";
+
 
           }else{
-            sun.style.display = "block";
             moon.style.display = "none";
-            Chart.defaults.global.defaultFontColor = '#d5d5d5';
+            sun.style.display = "block";
+            window.localStorage.setItem('theme', 'dark')
+            css_link.href = "{% static '/skillsgraph/css/dark_theme.css' %}";
 
           }
-        }
+
+          location.reload();
+        })
+
+
 
         let myChart = document.getElementById('myChart').getContext('2d');
 

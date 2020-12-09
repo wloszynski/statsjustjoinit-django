@@ -225,7 +225,7 @@ a.link-icon {
   color: #d5d5d5;
 }
 
-@media only screen and (max-width: 1424px) {
+@media only screen and (max-width: 1540px) {
   select {
     display: block;
   }
