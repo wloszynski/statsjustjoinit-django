@@ -1,3 +1,10 @@
+:root {
+  --white-wise: #f2f5f7;
+  --white: #ffffff;
+  --black: #000000;
+  --back-col: #ece5e5;
+}
+
 body,
 html {
   padding: 0;
@@ -5,10 +12,14 @@ html {
   font-family: Roboto;
 }
 
+canvas{
+  width: 70%;
+  height: 70%;
+}
 
 a {
   text-decoration: none;
-  color: black;
+  color: var(--black);
 }
 
 #root {
@@ -28,15 +39,15 @@ span.logo {
 
 #menu {
   font-size: 1.5em;
-  color: black;
+  color: var(--black);
   border: 0;
-  background-color: #ffffff;
+  background-color: var(--white);
   cursor: pointer;
 }
 
 .social-icons {
   font-size: 1.5em;
-  background-color: #ffffff;
+  background-color: var(--white);
   border: 0;
   cursor: pointer;
 }
@@ -85,7 +96,6 @@ span.logo {
   align-self: auto;
   order: 0;
   width: 60%;
-  margin-top: 10vh;
 }
 
 .top {
@@ -93,7 +103,7 @@ span.logo {
   justify-content: space-between;
   height: 8vh;
   line-height: 8vh;
-  border-bottom: 0.1px solid #f2f5f7;
+  border-bottom: 0.1px solid var(--white-wise);
 }
 
 .options {
@@ -103,7 +113,7 @@ span.logo {
 }
 
 div.num-app {
-  background-color: #ffffff;
+  background-color: var(--white);
   display: flex;
   justify-content: space-between;
 }
@@ -113,7 +123,7 @@ div.num-app {
   margin-top: 3vh;
   margin-left: 3vh;
   border: 0;
-  background-color: #f2f5f7;
+  background-color: var(--white-wise);
   cursor: pointer;
 }
 
@@ -123,7 +133,7 @@ div.content {
 }
 
 div.items-container {
-  background-color: #f2f5f7;
+  background-color: var(--white-wise);
 }
 
 div.item {
@@ -133,11 +143,11 @@ div.item {
   line-height: 6vh;
   margin-bottom: 0.5vh;
   margin-top: 1vh;
-  background-color: #ffffff;
+  background-color: var(--white);
 }
 
 div.item:hover {
-  background-color: #ece5e5;
+  background-color: var(--back-col);
 }
 
 .skill-items {
@@ -153,7 +163,7 @@ div.item:hover {
 }
 
 a.num-app-link {
-  background-color: #f2f5f7;
+  background-color: var(--white-wise);
   padding: 6px;
   padding-left: 15px;
   padding-right: 15px;
@@ -189,8 +199,8 @@ select {
   font-weight: bold;
   cursor: pointer;
   border-radius: 10px;
-  background-color: #ffffff;
-  color: black;
+  background-color: var(--white);
+  color: var(--black);
   padding: 10px;
   padding-right: 38px;
   transition: color 0.3s ease, background-color 0.3s ease,
@@ -210,7 +220,7 @@ a.link-icon {
 .icon-title {
   font-size: 0.75em;
   text-align: center;
-  color: black;
+  color: var(--black);
 }
 
 @media only screen and (max-width: 1424px) {
@@ -276,7 +286,7 @@ a.link-icon {
 
   .social-icons {
     font-size: 1.2em;
-    background-color: #ffffff;
+    background-color: var(--white);
     border: 0;
   }
   #menu {
