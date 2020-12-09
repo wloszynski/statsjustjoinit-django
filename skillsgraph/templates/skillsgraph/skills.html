@@ -84,6 +84,8 @@
         const categorySelect = document.querySelector('.link-list');
         const bBtnBg = document.querySelector('#back-btn-background');
         const menuBtn = document.querySelector('#menu');
+        const menuDiv = document.querySelector(".menu-bar")
+        const backMenu = document.querySelector('.back-menu-btn')
 
         const moon = document.querySelector("#moon");
         const sun = document.querySelector("#sun")
@@ -118,12 +120,14 @@
 
         });
         menuBtn.addEventListener("click", () => {
-          alert(jokesList[Math.floor(Math.random() * jokesList.length)]+"\n\nTam kiedyś będzie menu");
+          menuDiv.style.display = "block";
+
+
         });
+        backMenu.addEventListener("click", () => {
+          menuDiv.style.display = "none";
 
-
-
-
+        })
 
         if(window.localStorage.getItem('theme') == undefined){
         window.localStorage.setItem('theme', 'light')

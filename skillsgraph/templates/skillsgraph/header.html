@@ -1,3 +1,5 @@
+{% load static %}
+
 <header class="top flex-item">
   <div>
     <a href="/skills/all"><span class="logo">statsjustjoin.it </span></a>
@@ -7,6 +9,30 @@
     >
   </div>
   <div>
+    <div class="menu-bar">
+      <button class="back-menu-btn">
+        <i id="back-menu" class="fas fa-arrow-left"></i>
+      </button>
+      <img class="user-photo" src="{% static 'skillsgraph/img/inkwi.png' %}" alt="twarz">
+      <p>Kristof Ibisz</p>
+      <div class="menu-element">
+        <i id="back-menus" class="fas fa-cat"></i>Home
+      </div>
+      <div class="menu-element">
+        <i id="back-menus" class="fas fa-arrow-left"></i>
+      </div>
+      <div class="menu-element">
+        <i id="back-menus" class="fas fa-arrow-left"></i>
+      </div>
+      <div class="menu-element">
+        <i id="back-menus" class="fas fa-arrow-left"></i>
+      </div>
+      <div class="menu-element">
+        <i id="back-menus" class="fas fa-arrow-left"></i>
+      </div>
+
+
+    </div>
     <button class="social-icons" id="theme">
       <i id="sun" class="fas fa-sun" style="display:none"></i>
       <i id="moon" class="fas fa-moon" style="display:none"></i>
@@ -25,5 +51,5 @@
     <button id="menu">
       <i class="fas fa-bars"></i>
     </button>
-  </div>
+
 </header>
