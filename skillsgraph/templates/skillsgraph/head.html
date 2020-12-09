@@ -8,6 +8,9 @@
     <title>
       Stats Just Join IT: #1 Stats Job Board for IT Industry in Poland
     </title>
+    <style>
+
+    </style>
 
     <link
       rel="stylesheet"
@@ -26,17 +29,19 @@
       rel="stylesheet"
     />
    <link rel="stylesheet" href="{% static '/skillsgraph/css/light_theme_min.css' %}" id="theme-link"/>
+   <link rel="stylesheet" href="{% static '/skillsgraph/css/dark_theme_min.css' %}" id="theme-link2"/>
 
    <script>
      const css_link = document.querySelector("#theme-link")
+     const css_link2 = document.querySelector("#theme-link2")
 
      if(window.localStorage.getItem('theme') == undefined){
       window.localStorage.setItem('theme', 'light')
      }else{
        if(window.localStorage.getItem('theme') == 'light'){
-        css_link.href = "{% static '/skillsgraph/css/light_theme_min.css' %}"
+        css_link2.href = "";
        }else{
-        css_link.href = "{% static '/skillsgraph/css/dark_theme_min.css' %}"
+        css_link.href = "";
        }
      }
 
