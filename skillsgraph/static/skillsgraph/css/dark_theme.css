@@ -2,6 +2,9 @@
     width: 0px;
   }
 
+
+
+
 body,
 html {
   padding: 0;
@@ -38,6 +41,7 @@ span.logo {
   border: 0;
   background-color: #2c2c2c;
   cursor: pointer;
+  padding-right: 1vh;
 }
 
 .social-icons {
@@ -294,5 +298,8 @@ a.link-icon {
 @media only screen and (max-width: 380px) {
   #for-it {
     display: none;
+  }
+  .subtext{
+    display:none;
   }
 }
