@@ -32,7 +32,7 @@ def dataPrint(request, category):
     rows = dict(cur.fetchall())
     rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
     all_rows = rows.copy()
-    
+
     if len(rows) > 35:
         rest_rows = rows[36:]
         rows = rows[:36]
@@ -56,18 +56,18 @@ def jobs(request):
 
     cur.execute('''
         SELECT language.name, overtime_jobs.counter
-        FROM overtime_jobs 
+        FROM overtime_jobs
         INNER JOIN language ON language.id=overtime_jobs.language_id
         WHERE date_created like "2020-12-07"
     ''')
-    
+
     rows = dict(cur.fetchall()[1:])
     rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
     all_rows = rows.copy()
-    
-    if len(rows) > 35:
-        rest_rows = rows[36:]
-        rows = rows[:36]
+
+    if len(rows) > 15:
+        rest_rows = rows[16:]
+        rows = rows[:16]
         sum_rest_rows = 0
         for row in rest_rows:
             sum_rest_rows += row[1]
