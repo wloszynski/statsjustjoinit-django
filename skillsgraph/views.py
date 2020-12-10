@@ -6,7 +6,6 @@ import datetime
 def home(request):
     return redirect('/skills/all')
 
-
 def all(request):
     return redirect('/skills/all')
 
@@ -74,5 +73,5 @@ def jobs(request):
         rows.append(('other', sum_rest_rows))
 
 
-    return render(request, 'skillsgraph/jobs.html', {'rows':rows, 'categories':categories, 'categories_zipped':zip(categories, categories_menu)
+    return render(request, 'skillsgraph/skills.html', {'rows':rows, 'categories':categories, 'categories_zipped':zip(categories, categories_menu)
 , 'all_rows':all_rows, 'category_selected':'all jobs'})
