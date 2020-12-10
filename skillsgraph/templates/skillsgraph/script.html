@@ -70,13 +70,13 @@
         moon.style.display = "block";
         sun.style.display = "none";
         window.localStorage.setItem('theme', 'light')
-        css_link.href = "{% static '/skillsgraph/css/light_theme.css' %}";
+        css_link.href = "{% static '/skillsgraph/css/light_theme_min.css' %}";
 
       }else{
         moon.style.display = "none";
         sun.style.display = "block";
         window.localStorage.setItem('theme', 'dark')
-        css_link.href = "{% static '/skillsgraph/css/dark_theme.css' %}";
+        css_link.href = "{% static '/skillsgraph/css/dark_theme_min.css' %}";
 
       }
       location.reload();
