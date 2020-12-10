@@ -5,13 +5,12 @@
 :root {
 	--top-color: #3c3c3c;
 	--white-wise: #f2f5f7;
-  --background-col: #2c2c2c;
-  --font-col: #d5d5d5;
-  --back-col: #212121;
-  --content-col:#212121;
-  --hov-col: grey;
+	--background-col: #2c2c2c;
+	--font-col: #d5d5d5;
+	--back-col: #212121;
+	--content-col: #212121;
+	--hov-col: grey;
 }
-
 
 body,
 html {
@@ -20,7 +19,6 @@ html {
 	font-family: Roboto;
 	background-color: var(--background-col);
 }
-
 
 a {
 	text-decoration: none;
@@ -38,9 +36,9 @@ span.logo {
 	font-family: "Hind", sans-serif;
 }
 
-.subtext{
-	color:var(--font-col);
-  }
+.subtext {
+	color: var(--font-col);
+}
 
 .item span {
 	font-size: 1.5em;
@@ -59,7 +57,7 @@ span.logo {
 	font-size: 1.5em;
 	background-color: var(--background-col);
 	border: 0;
-	color:var(--font-col);
+	color: var(--font-col);
 	cursor: pointer;
 }
 
@@ -158,14 +156,11 @@ div.item {
 	color: var(--font-col)
 }
 
-
 div.num-app {
 	background-color: var(--background-col);
 	display: flex;
 	justify-content: space-between;
 }
-
-
 
 div.item:hover {
 	background-color: var(--hov-col);

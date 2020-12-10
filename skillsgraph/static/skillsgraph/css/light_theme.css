@@ -11,8 +11,6 @@
 	--font-col: #000000;
 }
 
-
-
 body,
 html {
 	padding: 0;
@@ -20,7 +18,6 @@ html {
 	font-family: Roboto;
 	background-color: var(--background-col);
 }
-
 
 a {
 	text-decoration: none;
@@ -38,9 +35,9 @@ span.logo {
 	font-family: "Hind", sans-serif;
 }
 
-.subtext{
-	color:var(--font-col);
-  }
+.subtext {
+	color: var(--font-col);
+}
 
 .item span {
 	font-size: 1.5em;
@@ -59,7 +56,7 @@ span.logo {
 	font-size: 1.5em;
 	background-color: var(--background-col);
 	border: 0;
-	color:var(--font-col);
+	color: var(--font-col);
 	cursor: pointer;
 }
 
@@ -158,14 +155,11 @@ div.item {
 	color: var(--font-col)
 }
 
-
 div.num-app {
 	background-color: var(--background-col);
 	display: flex;
 	justify-content: space-between;
 }
-
-
 
 div.item:hover {
 	background-color: var(--hov-col);
