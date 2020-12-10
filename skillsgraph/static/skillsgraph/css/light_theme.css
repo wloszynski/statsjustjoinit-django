@@ -133,7 +133,7 @@ span.logo {
 	margin-top: 3vh;
 	margin-left: 3vh;
 	border: 0;
-	background-color: var(--back-col);
+	background-color: var(--content-col);
 	cursor: pointer;
 	padding: 10px;
 }
