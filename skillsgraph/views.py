@@ -2,31 +2,84 @@ from django.shortcuts import render, redirect
 import sqlite3
 import datetime
 
+categories = [
+    'all',
+    'javascript',
+    'html',
+    'php',
+    'ruby',
+    'python',
+    'java',
+    'net',
+    'scala',
+    'c',
+    'mobile',
+    'testing',
+    'devops',
+    'ux',
+    'pm',
+    'game',
+    'analytics',
+    'security',
+    'data',
+    'go',
+    'sap',
+    'support',
+    'other',
+    ]
+categories_menu = [
+    'All',
+    'JS',
+    'HTML',
+    'PHP',
+    'Ruby',
+    'Python',
+    'Java',
+    '.Net',
+    'Scala',
+    'C',
+    'Mobile',
+    'Testing',
+    'DevOps',
+    'UX/UI',
+    'PM',
+    'Game',
+    'Analytics',
+    'Security',
+    'Data',
+    'Go',
+    'SAP',
+    'Support',
+    'Other',
+    ]
+
 
 def home(request):
     return redirect('/skills/all')
 
+
 def all(request):
     return redirect('/skills/all')
 
+
 def dataPrint(request, category):
-    categories = ['all', 'javascript', 'html', 'php', 'ruby', 'python', 'java', 'net', 'scala', 'c', 'mobile', 'testing', 'devops', 'ux', 'pm', 'game', 'analytics', 'security', 'data', 'go', 'sap', 'support', 'other']
-    categories_menu = ['All', 'JS', 'HTML', 'PHP', 'Ruby', 'Python', 'Java', '.Net', 'Scala', 'C', 'Mobile', 'Testing', 'DevOps', 'UX/UI', 'PM', 'Game', 'Analytics', 'Security', 'Data', 'Go', 'SAP', 'Support', 'Other']
 
     # now_date = str(datetime.datetime.now()).split(' ')[0]
+
     conn = sqlite3.connect('skill_counter.sqlite')
     cur = conn.cursor()
 
-    cur.execute('SELECT id FROM language WHERE name like ?',(category,))
+    cur.execute('SELECT id FROM language WHERE name like ?', (category,
+                ))
     cat_id = cur.fetchone()[0]
-
 
     cur.execute('''
         SELECT skill.name, overtime_skills.counter
         FROM overtime_skills
         INNER JOIN skill ON skill.id=overtime_skills.skill_id
         WHERE overtime_skills.language_id like ? AND date_created like "2020-12-07"
-    ''', (cat_id,))
+    ''',
+                (cat_id, ))
 
     rows = dict(cur.fetchall())
     rows = sorted(rows.items(), key=lambda x: x[1], reverse=True)
@@ -40,14 +93,16 @@ def dataPrint(request, category):
             sum_rest_rows += row[1]
         rows.append(('other', sum_rest_rows))
 
+    return render(request, 'skillsgraph/skills.html', {
+        'categories': categories,
+        'rows': rows,
+        'category_selected': category,
+        'all_rows': all_rows,
+        'categories_zipped': zip(categories, categories_menu),
+        })
 
-    return render(request, 'skillsgraph/skills.html', {'categories':categories,'rows':rows,
- 'category_selected':category, 'all_rows':all_rows, 'categories_zipped':zip(categories, categories_menu)})
 
 def jobs(request):
-    categories = ['all', 'javascript', 'html', 'php', 'ruby', 'python', 'java', 'net', 'scala', 'c', 'mobile', 'testing', 'devops', 'ux', 'pm', 'game', 'analytics', 'security', 'data', 'go', 'sap', 'support', 'other']
-    categories_menu = ['All', 'JS', 'HTML', 'PHP', 'Ruby', 'Python', 'Java', '.Net', 'Scala', 'C', 'Mobile', 'Testing', 'DevOps', 'UX/UI', 'PM', 'Game', 'Analytics', 'Security', 'Data', 'Go', 'SAP', 'Support', 'Other']
-
 
     now_date = str(datetime.datetime.now()).split(' ')[0]
     conn = sqlite3.connect('skill_counter.sqlite')
@@ -72,6 +127,13 @@ def jobs(request):
             sum_rest_rows += row[1]
         rows.append(('other', sum_rest_rows))
 
+    return render(request, 'skillsgraph/skills.html', {
+        'rows': rows,
+        'categories': categories,
+        'categories_zipped': zip(categories, categories_menu),
+        'all_rows': all_rows,
+        'category_selected': 'all jobs',
+        })
 
-    return render(request, 'skillsgraph/skills.html', {'rows':rows, 'categories':categories, 'categories_zipped':zip(categories, categories_menu)
-, 'all_rows':all_rows, 'category_selected':'all jobs'})
+
+
