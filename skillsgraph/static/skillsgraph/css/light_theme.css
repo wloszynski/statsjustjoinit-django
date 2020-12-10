@@ -1,29 +1,30 @@
-:root {
-	--white-wise: #f2f5f7;
-	--white: #ffffff;
-	--black: #000000;
-	--back-col: #ece5e5;
-}
-
 ::-webkit-scrollbar {
 	width: 0px;
 }
+
+:root {
+	--top-color: #f2f5f7;
+	--content-col: #f2f5f7;
+	--background-col: #ffffff;
+	--hov-col: #ece5e5;
+	--back-col: #ece5e5;
+	--font-col: #000000;
+}
+
+
 
 body,
 html {
 	padding: 0;
 	margin: 0;
 	font-family: Roboto;
+	background-color: var(--background-col);
 }
 
-canvas {
-	width: 70%;
-	height: 70%;
-}
 
 a {
 	text-decoration: none;
-	color: var(--black);
+	color: var(--font-col);
 }
 
 #root {
@@ -37,23 +38,28 @@ span.logo {
 	font-family: "Hind", sans-serif;
 }
 
+.subtext{
+	color:var(--font-col);
+  }
+
 .item span {
 	font-size: 1.5em;
 }
 
 #menu {
 	font-size: 1.5em;
-	color: var(--black);
+	color: var(--font-col);
 	border: 0;
-	background-color: var(--white);
+	background-color: var(--background-col);
 	cursor: pointer;
 	padding-right: 1vh;
 }
 
 .social-icons {
 	font-size: 1.5em;
-	background-color: var(--white);
+	background-color: var(--background-col);
 	border: 0;
+	color:var(--font-col);
 	cursor: pointer;
 }
 
@@ -109,7 +115,7 @@ span.logo {
 	justify-content: space-between;
 	height: 8vh;
 	line-height: 8vh;
-	border-bottom: 0.1px solid var(--white-wise);
+	border-bottom: 0.1px solid var(--top-color);
 }
 
 .options {
@@ -118,10 +124,8 @@ span.logo {
 	padding-top: 0.5vh;
 }
 
-div.num-app {
-	background-color: var(--white);
-	display: flex;
-	justify-content: space-between;
+#back-btn-background {
+	background-color: var(--back-col);
 }
 
 #back-chart-btn {
@@ -140,7 +144,7 @@ div.content {
 }
 
 div.items-container {
-	background-color: var(--white-wise);
+	background-color: var(--content-col);
 }
 
 div.item {
@@ -150,11 +154,21 @@ div.item {
 	line-height: 6vh;
 	margin-bottom: 0.5vh;
 	margin-top: 1vh;
-	background-color: var(--white);
+	background-color: var(--background-col);
+	color: var(--font-col)
 }
 
+
+div.num-app {
+	background-color: var(--background-col);
+	display: flex;
+	justify-content: space-between;
+}
+
+
+
 div.item:hover {
-	background-color: var(--back-col);
+	background-color: var(--hov-col);
 }
 
 .skill-items {
@@ -170,7 +184,7 @@ div.item:hover {
 }
 
 a.num-app-link {
-	background-color: var(--white-wise);
+	background-color: var(--content-col);
 	padding: 6px;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -209,8 +223,8 @@ select {
 	font-weight: bold;
 	cursor: pointer;
 	border-radius: 10px;
-	background-color: var(--white);
-	color: var(--black);
+	background-color: var(--background-col);
+	color: var(--font-col);
 	padding: 10px;
 	padding-right: 38px;
 	transition: color 0.3s ease, background-color 0.3s ease, border-bottom-color 0.3s ease;
@@ -229,7 +243,7 @@ a.link-icon {
 .icon-title {
 	font-size: 0.75em;
 	text-align: center;
-	color: var(--black);
+	color: var(--font-col);
 }
 
 @media only screen and (max-width: 1540px) {
@@ -273,7 +287,7 @@ a.link-icon {
 	}
 	.arrow-btn {
 		font-size: 2em;
-		color: var(--black);
+		color: var(--font-col);
 	}
 }
 
@@ -296,7 +310,6 @@ a.link-icon {
 	}
 	.social-icons {
 		font-size: 1.2em;
-		background-color: var(--white);
 		border: 0;
 	}
 	#menu {
