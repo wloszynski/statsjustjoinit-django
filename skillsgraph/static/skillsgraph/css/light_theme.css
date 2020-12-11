@@ -159,6 +159,7 @@ div.num-app {
 	background-color: var(--background-col);
 	display: flex;
 	justify-content: space-between;
+	font-weight: 700;
 }
 
 div.item:hover {
