@@ -9,7 +9,7 @@
           src="{% static '/skillsgraph/img/' %}job.svg"
           alt="job.svg"
         />
-        {% if category_selected != 'all jobs' %}
+         {% if category_selected != 'all jobs' %}
         <span class="icon-title">Jobs</span>
         {% else %}
         <span class="icon-title"><strong>Jobs</strong></span>
@@ -32,10 +32,10 @@
       {% endfor %}
       <select name="category" class="link-list">
         <option value="jobs" selected>Jobs</option>
-        {% for category in categories %} {% if category_selected == category %}
-        <option value="{{ category }}" selected>{{ category|title }}</option>
+        {% for category in categories_zipped %} {% if category_selected == category.0 %}
+        <option value="{{ category.0 }}" selected>{{ category.1 }}</option>
         {% else %}
-        <option value="{{ category }}">{{ category|title }}</option>
+        <option value="{{ category.0 }}">{{ category.1 }}</option>
         {% endif %} {% endfor %}
       </select>
     </nav>

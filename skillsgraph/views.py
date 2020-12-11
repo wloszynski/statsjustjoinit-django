@@ -54,6 +54,7 @@ categories_menu = [
     ]
 
 
+
 def home(request):
     return redirect('/skills/all')
 
@@ -98,7 +99,7 @@ def dataPrint(request, category):
         'rows': rows,
         'category_selected': category,
         'all_rows': all_rows,
-        'categories_zipped': zip(categories, categories_menu),
+        'categories_zipped': list(zip(categories, categories_menu)),
         })
 
 
@@ -130,7 +131,7 @@ def jobs(request):
     return render(request, 'skillsgraph/skills.html', {
         'rows': rows,
         'categories': categories,
-        'categories_zipped': zip(categories, categories_menu),
+        'categories_zipped': list(zip(categories, categories_menu)),
         'all_rows': all_rows,
         'category_selected': 'all jobs',
         })
