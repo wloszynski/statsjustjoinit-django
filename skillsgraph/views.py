@@ -78,7 +78,7 @@ def dataPrint(request, category):
         SELECT skill.name, overtime_skills.counter
         FROM overtime_skills
         INNER JOIN skill ON skill.id=overtime_skills.skill_id
-        WHERE overtime_skills.language_id like ? AND date_created like "2021-01-05"
+        WHERE overtime_skills.language_id like ? AND date_created like "2021-01-04"
     ''',
                 (cat_id, ))
 
@@ -113,7 +113,7 @@ def jobs(request):
         SELECT language.name, overtime_jobs.counter
         FROM overtime_jobs
         INNER JOIN language ON language.id=overtime_jobs.language_id
-        WHERE date_created like "2021-01-05"
+        WHERE date_created like "2021-01-04"
     ''')
 
     rows = dict(cur.fetchall()[1:])
